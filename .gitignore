@@ -1,5 +1,14 @@
+#Solid Node build artifacts
+_build*
+__pycache__/
+snapshot.png
+screenshot.png
+
 #Kicad temp files
 /heated_bed/*.bak
 *kicad_pcb-bak
 $*.sch
 /heated_bed/gerbers/*
+
+# Generated screenshot removed during license adequation
+/img/MM2.png

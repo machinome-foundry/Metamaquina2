@@ -1,0 +1,42 @@
+Metamaquina 2: source and simulation licensing
+
+Upstream design source retains the grants and copyright notices in its files.
+Root LICENSE supplies the GPLv3 text; it does not override per-file grants.
+In particular Metamaquina2.scad and gears.scad declare GPL-3.0-or-later.
+Rely on those declared grants, preserving the credits to inherited material.
+
+Copyright (C) 2026 Luis Henrique Cassis Fagundes for original contributions.
+In the model package (originally metamaquina2/, now simulation/):
+- __init__.py files, scad.py, params.py, part.py, materials.py, gt2.py and
+  test_*.py are original loader/probe/base/helper/test software licensed
+  AGPL-3.0-or-later. Upstream source loaded by them retains its own license.
+- Other Python files integrate or adapt the upstream machine's design,
+  geometry, placement and assembly. They retain GPL-3.0-only for that
+  source-integrating layer rather than claiming upstream ownership.
+The Python headers make this split explicit. LICENSES/AGPL-3.0.txt supplies
+the AGPL text. GPLv3 section 13 permits the GPLv3/AGPLv3 combination; it is not
+a blanket permission to change upstream grants to future AGPL versions.
+
+Original Foundry project configuration, .gitignore additions, README prose,
+documentation and OpenSpec additions are AGPL-3.0-or-later except for upstream
+material or adapted design content, which retains the source's terms.
+Existing grants to prior recipients are not revoked.
+
+Luis's source-design modifications to Metamaquina2.scad, CalibrationZBars.scad
+and Metamaquina_2_extruders.scad retain their existing GPL grants. Their
+modification comments identify the pulley-pitch corrections when introduced.
+The simulation builds a movable node tree, adds drivers and models purchased
+parts. See the retained project records and commit history for those changes.
+
+External MCAD/involute_gears.scad is declared GNU LGPL 2.1 by GregFrost (2010)
+in the cited elmom/MCAD source (see CREDITS). This repository does not vendor it.
+Keep its notices, corresponding source and applicable LGPL obligations with
+any distribution incorporating that component. No arbitrary local MCAD
+installation or generated distribution is certified by this record.
+
+Generated geometry and exports containing upstream design material retain
+that material's applicable terms; running AGPL software alone does not
+relicense outputs. Source photographs and cutting diagrams are not included
+in the new software grant. Screenshots must not be committed.
+Licensing maintenance, 2026-09-21: scoped notices/texts added and the README-
+identified OpenSCAD screenshot img/MM2.png removed; no executable changes.

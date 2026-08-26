@@ -1,3 +1,12 @@
+<!-- foundry-license-scope -->
+Licensing: upstream design source retains its per-file GPL grants.
+The simulation combines original AGPL-3.0-or-later helpers with GPLv3
+source-integrating design adaptations; see [NOTICE](NOTICE) and
+[CREDITS](CREDITS) for the exact scope and attribution. Source photographs
+and cutting diagrams are outside the new software grant.
+<!-- /foundry-license-scope -->
+
+
 
 Metamaquina2
 ============
@@ -25,7 +34,6 @@ There is also a panel for lasercutting 2mm acrylic to cover the electronics PCB 
 The complete 3D model of the machine is described by the Metamaquina2.scad file. Open is in 
 OpenSCAD and press F5 to render it.
 
-![An OpenSCAD rendering of the Metamaquina 2 desktop 3d printer](https://raw.github.com/Metamaquina/Metamaquina2/master/img/MM2.png)
 
 Hacking the code
 ================

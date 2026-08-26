@@ -1,0 +1,19 @@
+Metamaquina 2 — fully parametric 3D printer
+Source: https://github.com/Metamaquina/Metamaquina2
+Source revision: b4934e6775ad4cea7924ac45ed2067894215540f
+This is a pinned source revision, not a release-version claim.
+Copyright 2013 Metamáquina and the contributors named in each source file.
+Source authors include Felipe Corrêa da Silva Sanches and Rafael H. de L.
+Moretti. Their original notices and the other contributors' notices remain.
+License: upstream per-file GNU GPL grants, including GPL-3.0-or-later.
+Gear code also credits Guy 'DeuxVis' P. (2011) and Giles Bathgate.
+External MCAD involute_gears.scad credits GregFrost (2010), GNU LGPL 2.1:
+https://github.com/elmom/MCAD/blob/97fae588df58f9f28b08221901e5b14dc1af3cb0/involute_gears.scad
+MCAD is an external dependency, not vendored or relicensed here.
+
+Simulation and modifications:
+Copyright (C) 2026 Luis Henrique Cassis Fagundes
+Display credit: Luis Fagundes.
+Original loader/control/helper software: AGPL-3.0-or-later.
+Source-integrating design/assembly adaptations: GPL-3.0-only; see NOTICE.
+License adequation: 2026-09-21. No geometry changed by that maintenance.
