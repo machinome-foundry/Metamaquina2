@@ -7,7 +7,6 @@ and cutting diagrams are outside the new software grant.
 <!-- /foundry-license-scope -->
 
 
-
 Metamaquina2
 ============
 
