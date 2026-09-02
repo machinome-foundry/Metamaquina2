@@ -4,7 +4,7 @@
 # End Foundry notice
 """The lasercut extruder."""
 
-from solid_node.node import AssemblyNode
+from solid_node.node import AssemblyNode, Length
 
 from metamaquina2.hardware.bearing_608zz import Bearing608zz
 from metamaquina2.hardware.bolt import Bolt
@@ -88,7 +88,7 @@ class Extruder(AssemblyNode):
     #: model` and commented "for attaching the jhead_body", which is
     #: exactly what they are here.  Thirty is the five slices' own
     #: thickness, so each one just spans the block.
-    hot_end_bolt = 30
+    hot_end_bolt = Length(30.0, min=0)
 
     block = ExtruderBlock()
     idler = Idler()
