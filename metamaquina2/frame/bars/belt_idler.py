@@ -4,7 +4,8 @@
 # End Foundry notice
 """A 608 bearing running as an idler on a horizontal frame bar."""
 
-from solid_node.node import AssemblyNode, Flag
+from solid_node.node import AssemblyNode
+from solid_node.parameters import Flag
 
 from metamaquina2.hardware.bearing_608zz import Bearing608zz
 from metamaquina2.hardware.m8_mudguard_washer import M8MudguardWasher

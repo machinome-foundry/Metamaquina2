@@ -4,7 +4,7 @@
 # End Foundry notice
 """The spring a corner of the heated bed stands on."""
 
-from solid_node.node import Length
+from solid_node.parameters import Length
 
 from metamaquina2.params import (
     heatedbed_spring_length,

@@ -4,7 +4,8 @@
 # End Foundry notice
 """A length of M8 threaded bar."""
 
-from solid_node.node import Build123dNode, Length
+from solid_node.node import Build123dNode
+from solid_node.parameters import Length
 
 from metamaquina2 import materials, thread
 from metamaquina2.params import m8_diameter

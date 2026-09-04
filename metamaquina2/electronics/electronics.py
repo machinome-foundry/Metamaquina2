@@ -4,7 +4,8 @@
 # End Foundry notice
 """The electronics: controller, power supply, endstops and cable clips."""
 
-from solid_node.node import AssemblyNode, Flag
+from solid_node.node import AssemblyNode
+from solid_node.parameters import Flag
 
 from metamaquina2 import frames
 from metamaquina2.electronics.cable_clips import CableClips

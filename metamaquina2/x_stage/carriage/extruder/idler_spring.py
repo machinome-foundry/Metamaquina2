@@ -4,7 +4,7 @@
 # End Foundry notice
 """The spring that presses the extruder idler onto the filament."""
 
-from solid_node.node import Length
+from solid_node.parameters import Length
 
 from metamaquina2.params import m4_diameter
 from metamaquina2.spring import Spring
