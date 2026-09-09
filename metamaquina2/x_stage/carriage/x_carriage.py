@@ -4,6 +4,7 @@
 # End Foundry notice
 """The X carriage."""
 
+from solid_node.motion.joints import Prismatic
 from solid_node.node import AssemblyNode
 
 from metamaquina2.hardware.double_m3_spacer import DoubleM3Spacer
@@ -85,9 +86,16 @@ class XCarriage(AssemblyNode):
     than in the extruder, because it draws it from a file that never
     parsed.  Here it hangs where a builder bolts it, under the extruder
     block; see `jhead`.
+
+    `travel` is how far this carriage has slid along the beam from the
+    pose `render()` draws it at, `XCarPosition`: a displacement, not a
+    machine coordinate, because the design places the carriage at
+    `XCarPosition` and the axis only ever applied the offset from there.
     """
 
     spacer_span = 1.3
+
+    travel = Prismatic(axis=(1, 0, 0), unit='mm')
 
     plate = XCarriagePlate()
     spacers = DoubleM3Spacer().repeat(len(SPACER_POSITIONS))
