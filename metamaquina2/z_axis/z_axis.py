@@ -4,7 +4,8 @@
 # End Foundry notice
 """The Z axis."""
 
-from solid_node.node import AssemblyNode, RotationalPort
+from solid_node.motion.ports import RotationalPort
+from solid_node.node import AssemblyNode
 
 from metamaquina2.z_axis.z_bars import ZBars
 from metamaquina2.z_axis.z_couplings import ZCouplings
