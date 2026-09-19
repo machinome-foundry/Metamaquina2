@@ -9,13 +9,13 @@ layer is responsible for held as contracts.
 
 ## Requirements
 
-### Requirement: The machine is a solid-node model with a declared entry point
+### Requirement: The machine is a machinome model with a declared entry point
 The project SHALL declare `metamaquina2.metamaquina2:Metamaquina2` as its
-solid-node model in `pyproject.toml`, so the solid CLI and the studio open
+machinome model in `pyproject.toml`, so the solid CLI and the studio open
 the whole machine from the repository root without further configuration.
 
 #### Scenario: The studio opens the project
-- **WHEN** the project is opened by a solid-node host
+- **WHEN** the project is opened by a machinome host
 - **THEN** the mounted model is the complete Metamaquina 2 assembly tree
 
 ### Requirement: The tree follows the build, not the source file

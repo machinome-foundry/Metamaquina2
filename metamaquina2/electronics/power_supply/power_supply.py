@@ -4,7 +4,7 @@
 # End Foundry notice
 """The power supply, its box and its mounting bolts."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.electronics.power_supply.box import PowerSupplyBox
 from metamaquina2.electronics.power_supply.unit import PowerSupplyUnit

@@ -54,7 +54,7 @@ wrong.  Where the design states a length for the same gap and the
 statement disagrees with where its own parts stand, that disagreement
 is asked for too, so it cannot quietly go away.
 
-The two whole-model contracts `solid new` scaffolds --
+The two whole-model contracts `machinome new` scaffolds --
 `assertNoDisconnectedSolids` and `assertNoSolidInterference` -- are
 deliberately not asserted, and it is worth being precise about why,
 because they would both fail:
@@ -79,13 +79,13 @@ import math
 import numpy
 import trimesh
 
-from solid_node.core.serializer import (
+from machinome.core.serializer import (
     document_version,
     serialize_node,
     symbolic_document,
 )
-from solid_node.simulation import Sim
-from solid_node.test import TestCase
+from machinome.simulation import Sim
+from machinome.test import TestCase
 
 from metamaquina2 import filament, gt2, jhead, thread, z_screw
 from metamaquina2.hardware.gt2_pulley import TEETH, GT2Pulley

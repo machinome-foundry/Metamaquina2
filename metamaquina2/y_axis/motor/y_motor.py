@@ -4,9 +4,9 @@
 # End Foundry notice
 """The Y motor on its holder."""
 
-from solid_node.motion.joints import Revolute
-from solid_node.motion.ports import RotationalPort
-from solid_node.node import AssemblyNode
+from machinome.motion.joints import Revolute
+from machinome.motion.ports import RotationalPort
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.gt2_pulley import WIDTH, GT2Pulley
 from metamaquina2.hardware.nema17_mount import Nema17Mount

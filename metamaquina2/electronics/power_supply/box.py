@@ -4,7 +4,7 @@
 # End Foundry notice
 """The lasercut box that encloses the power supply."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.electronics.power_supply.box_plate import (
     PowerSupplyBoxPlate)

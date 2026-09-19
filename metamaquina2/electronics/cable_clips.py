@@ -4,7 +4,7 @@
 # End Foundry notice
 """Every cable clip in the machine, on the panel it sticks to."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2 import frames
 from metamaquina2.electronics.cable_clip import CableClip

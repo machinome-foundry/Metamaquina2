@@ -4,7 +4,7 @@
 # End Foundry notice
 """The two Z motors, hanging under the bottom panel."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.nema17_mount import Nema17Mount
 from metamaquina2.params import (

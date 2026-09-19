@@ -4,7 +4,7 @@
 # End Foundry notice
 """The Y axis."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.params import (
     base_bars_Zdistance,

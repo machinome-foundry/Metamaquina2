@@ -4,8 +4,8 @@
 # End Foundry notice
 """The two vertical threaded bars that lift the X stage."""
 
-from solid_node.motion.ports import RotationalPort
-from solid_node.node import AssemblyNode
+from machinome.motion.ports import RotationalPort
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.threaded_rod import SpinningThreadedRod
 from metamaquina2.params import (

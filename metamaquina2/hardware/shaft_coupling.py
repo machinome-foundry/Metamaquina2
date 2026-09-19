@@ -4,7 +4,7 @@
 # End Foundry notice
 """The flexible coupling between a Z motor shaft and a Z bar."""
 
-from solid_node.motion.joints import Revolute
+from machinome.motion.joints import Revolute
 
 from metamaquina2 import materials
 from metamaquina2.part import ScadPart

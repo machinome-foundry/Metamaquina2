@@ -4,7 +4,7 @@
 # End Foundry notice
 """The frame: panels, the bolts that join them, and the bars."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.frame.bars.bars import Bars
 from metamaquina2.frame.joints import PanelJoints

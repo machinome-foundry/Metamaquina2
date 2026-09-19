@@ -4,7 +4,7 @@
 # End Foundry notice
 """A lasercut clamp that grips the Y belt under the platform."""
 
-from solid_node.parameters import Length
+from machinome.parameters import Length
 
 from metamaquina2.part import SheetPart
 from metamaquina2.scad import belt_clamp

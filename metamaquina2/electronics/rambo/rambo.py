@@ -4,7 +4,7 @@
 # End Foundry notice
 """The RAMBo controller, mounted on the left panel."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.electronics.rambo.cover import RamboCover
 from metamaquina2.electronics.rambo.cover_bolt import CoverBolt

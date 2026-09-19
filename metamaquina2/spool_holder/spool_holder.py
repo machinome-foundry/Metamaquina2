@@ -4,7 +4,7 @@
 # End Foundry notice
 """The spool holder, standing beside the machine."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.frame.tslot_bolt import TSlotBolt
 from metamaquina2.hardware.m8_domed_cap_nut import M8DomedCapNut

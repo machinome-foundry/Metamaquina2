@@ -3,9 +3,9 @@ schema: spec-driven
 # Project context shown to AI when creating artifacts.
 context: |
   Metamaquina2 is the decade-old OpenSCAD design of the Metamaquina 2
-  desktop 3D printer, plus a solid-node wrapper started in August 2026:
+  desktop 3D printer, plus a machinome wrapper started in August 2026:
   the Python package `metamaquina2/` reads the unchanged .scad sources
-  as a solid_node assembly tree in which every part a builder handles
+  as a machinome assembly tree in which every part a builder handles
   is a leaf, every group assembled before it goes into something bigger
   is an AssemblyNode, and the machine's motion is three drivers on the
   root. The entry point is declared in pyproject.toml as

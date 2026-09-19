@@ -4,7 +4,7 @@
 # End Foundry notice
 """Two lasercut M3 spacers, stacked."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.m3_spacer import M3Spacer
 from metamaquina2.params import thickness

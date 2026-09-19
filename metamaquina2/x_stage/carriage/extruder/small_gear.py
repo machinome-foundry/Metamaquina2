@@ -4,7 +4,7 @@
 # End Foundry notice
 """The small printed gear on the extruder motor shaft."""
 
-from solid_node.parameters import Count
+from machinome.parameters import Count
 
 from metamaquina2 import materials
 from metamaquina2.part import ScadPart

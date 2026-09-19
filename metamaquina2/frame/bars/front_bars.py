@@ -4,7 +4,7 @@
 # End Foundry notice
 """The two threaded bars across the front of the machine."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.frame.bars.bar_clamp_mount import BarClampMount
 from metamaquina2.frame.bars.belt_idler import BeltIdler

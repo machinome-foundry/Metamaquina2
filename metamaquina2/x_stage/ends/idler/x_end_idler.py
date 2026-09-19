@@ -4,7 +4,7 @@
 # End Foundry notice
 """The idler-side X end."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.frame.tslot_bolt import TSlotBolt
 from metamaquina2.hardware.lm8uu import LM8UU

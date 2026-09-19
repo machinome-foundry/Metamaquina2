@@ -4,9 +4,9 @@
 # End Foundry notice
 """A length of M8 threaded bar."""
 
-from solid_node.motion.joints import Revolute
-from solid_node.node import Build123dNode
-from solid_node.parameters import Length
+from machinome.motion.joints import Revolute
+from machinome.node import Build123dNode
+from machinome.parameters import Length
 
 from metamaquina2 import materials, thread
 from metamaquina2.params import m8_diameter

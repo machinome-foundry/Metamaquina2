@@ -4,8 +4,8 @@
 # End Foundry notice
 """The X carriage."""
 
-from solid_node.motion.joints import Prismatic
-from solid_node.node import AssemblyNode
+from machinome.motion.joints import Prismatic
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.double_m3_spacer import DoubleM3Spacer
 from metamaquina2.hardware.lm8uu import LM8UU

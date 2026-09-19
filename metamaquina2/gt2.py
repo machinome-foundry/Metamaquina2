@@ -52,7 +52,7 @@ line*.  Three consequences shape everything below.
 Why the belts were done now
 ---------------------------
 
-This branch exists to put solid-node's new flexible leaf in front of a
+This branch exists to put machinome's new flexible leaf in front of a
 real machine rather than a sample one, and to say honestly what happened.
 
 What worked: both belts are `MolejoNode` leaves under the axis that
@@ -186,7 +186,7 @@ import math
 
 import numpy
 from molejo import Polygon, Teeth
-from solid_node.node import MolejoNode
+from machinome.node import MolejoNode
 
 from metamaquina2 import materials
 from metamaquina2.scad import scad_sources

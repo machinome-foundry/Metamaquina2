@@ -4,7 +4,7 @@
 # End Foundry notice
 """The four horizontal threaded bars that hold the frame square."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.frame.bars.front_bars import FrontBars
 from metamaquina2.frame.bars.rear_bars import RearBars

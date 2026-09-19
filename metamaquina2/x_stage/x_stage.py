@@ -4,8 +4,8 @@
 # End Foundry notice
 """The X stage: the whole beam the Z axis lifts."""
 
-from solid_node.motion.joints import Prismatic
-from solid_node.node import AssemblyNode
+from machinome.motion.joints import Prismatic
+from machinome.node import AssemblyNode
 
 from metamaquina2.params import (
     XCarPosition,

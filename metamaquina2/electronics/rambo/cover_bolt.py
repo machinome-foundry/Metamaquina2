@@ -4,7 +4,7 @@
 # End Foundry notice
 """The bolt that holds the RAMBo cover down."""
 
-from solid_node.parameters import Length
+from machinome.parameters import Length
 
 from metamaquina2 import materials
 from metamaquina2.part import ScadPart, curve

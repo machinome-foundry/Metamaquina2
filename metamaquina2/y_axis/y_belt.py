@@ -7,7 +7,7 @@
 import math
 
 from molejo import P, Shape, Wrap
-from solid_node.motion.ports import TranslationalPort
+from machinome.motion.ports import TranslationalPort
 
 from metamaquina2 import gt2
 from metamaquina2.hardware.gt2_pulley import TEETH
@@ -129,7 +129,7 @@ CLAMP_ORIGIN = gt2.span_origin(CIRCLES, CLAMP_SPAN)[0]
 #: groove, in fact, since sixteen of them are alike -- so either number
 #: says the same thing to the geometry.  But this one is the constant
 #: the serialized expression leads with, and the viewer's expression
-#: evaluator (jokenizer 0.4.5, through `solid_node.viewers.widget`)
+#: evaluator (jokenizer 0.4.5, through `machinome.viewers.widget`)
 #: parses subtraction right-associatively: it reads `-a + b` as
 #: `-(a + b)` and `1 - 2 - 3` as 2.  A negative lead constant therefore
 #: negates the whole angle in the browser, which flips the *rate* along

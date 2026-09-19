@@ -4,7 +4,7 @@
 # End Foundry notice
 """The idler release handle, its bolts, and the springs on them."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.bolt import Bolt
 from metamaquina2.hardware.m4_washer import M4Washer

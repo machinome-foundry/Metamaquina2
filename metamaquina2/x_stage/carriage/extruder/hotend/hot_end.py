@@ -4,7 +4,7 @@
 # End Foundry notice
 """The hot end, as the five parts a builder puts together."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2 import jhead
 from metamaquina2.x_stage.carriage.extruder.hotend.heater_resistor import (

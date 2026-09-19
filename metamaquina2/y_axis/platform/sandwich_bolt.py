@@ -4,8 +4,8 @@
 # End Foundry notice
 """The washer and bolt that pull a bearing sandwich together."""
 
-from solid_node.node import AssemblyNode
-from solid_node.parameters import Length
+from machinome.node import AssemblyNode
+from machinome.parameters import Length
 
 from metamaquina2.hardware.bolt import Bolt
 from metamaquina2.hardware.m3_washer import M3Washer

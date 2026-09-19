@@ -4,7 +4,7 @@
 # End Foundry notice
 """The t-slot hardware that bolts the frame's panels to each other."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2 import frames
 from metamaquina2.frame.tslot_bolt import TSlotBolt

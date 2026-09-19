@@ -4,7 +4,7 @@
 # End Foundry notice
 """The extruder idler arm."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.bearing_608zz import Bearing608zz
 from metamaquina2.params import (

@@ -4,7 +4,7 @@
 # End Foundry notice
 """The extruder body: five slices stacked."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.params import thickness
 from metamaquina2.x_stage.carriage.extruder.slice import ExtruderSlice

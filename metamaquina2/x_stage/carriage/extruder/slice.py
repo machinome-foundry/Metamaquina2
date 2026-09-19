@@ -4,7 +4,7 @@
 # End Foundry notice
 """One of the five plates the extruder body is stacked from."""
 
-from solid_node.parameters import Count
+from machinome.parameters import Count
 
 from metamaquina2.part import SheetPart
 from metamaquina2 import scad

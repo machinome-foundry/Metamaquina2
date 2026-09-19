@@ -3,7 +3,7 @@
 ## Purpose
 
 Keep the decade-old OpenSCAD design the single source of truth while the
-solid-node layer reads it: geometry comes from the design's own modules,
+machinome layer reads it: geometry comes from the design's own modules,
 dimensions from the design's own variables, and an edit to either reaches
 every part that depends on it.
 

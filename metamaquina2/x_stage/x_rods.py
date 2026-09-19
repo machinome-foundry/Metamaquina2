@@ -4,7 +4,7 @@
 # End Foundry notice
 """The pair of smooth rods the X carriage slides on."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.smooth_rod import SmoothRod
 from metamaquina2.params import (

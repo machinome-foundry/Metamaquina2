@@ -5,7 +5,7 @@
 """M8 hex nut."""
 
 from build123d import RegularPolygon, extrude
-from solid_node.node import Build123dNode
+from machinome.node import Build123dNode
 
 from metamaquina2 import materials, thread
 from metamaquina2.params import m8_diameter, m8_nut_R, m8_nut_height

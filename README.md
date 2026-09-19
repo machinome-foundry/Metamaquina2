@@ -38,7 +38,7 @@ The machine as a node tree
 ==========================
 
 Beside the OpenSCAD design there is a second reading of it: a
-solid-node tree in `metamaquina2/`, in which every part a builder
+machinome tree in `metamaquina2/`, in which every part a builder
 handles is a leaf and every group that gets put together before it goes
 into something bigger is an assembly. The geometry is still the .scad
 design's -- the nodes call its modules and read its dimensions -- and
@@ -52,7 +52,7 @@ placement of every part a builder bolts down and leaves -- the frame,
 the panels, the fasteners, the boxes at both ends of the beam, the reel
 stand. It reads no driver, so it is run once. What follows a driver is
 declared where each part is: the carriage's slide, the bed's slide and
-the beam's lift are `solid_node.motion` joints on the bodies that have
+the beam's lift are `machinome.motion` joints on the bodies that have
 them, and `drives()` relations say that the three axes turn the screws,
 the couplings and the two motor pulleys the belts are meshed on --
 composed inside each rest placement, which is why a screw can spin
@@ -61,15 +61,15 @@ about its own axis and still stand where it is held. What is left in
 of filament is dragged into, which is molejo geometry rather than a
 rigid part's pose.
 
-    solid test metamaquina2/metamaquina2.py     # the contracts
-    solid build metamaquina2/metamaquina2.py    # build the machine
-    solid develop metamaquina2/metamaquina2.py  # watch and serve it
+    machinome test metamaquina2/metamaquina2.py     # the contracts
+    machinome build metamaquina2/metamaquina2.py    # build the machine
+    machinome develop metamaquina2/metamaquina2.py  # watch and serve it
 
 Each node declares its parameters, so the two the machine itself
 declares can be set from the shell on any of those commands:
 
-    solid build metamaquina2/metamaquina2.py --set spool_holder_offset=500
-    solid build metamaquina2/metamaquina2.py --set power_supply_fitted=false
+    machinome build metamaquina2/metamaquina2.py --set spool_holder_offset=500
+    machinome build metamaquina2/metamaquina2.py --set power_supply_fitted=false
 
 `spool_holder_offset` is how far beside the machine the filament stand
 sits, along the machine's own x -- the one placement here that this

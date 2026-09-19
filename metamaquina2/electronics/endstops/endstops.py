@@ -4,7 +4,7 @@
 # End Foundry notice
 """All four endstops, on the panels they mount to."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2 import frames
 from metamaquina2.electronics.endstops.y_endstop import YEndstop

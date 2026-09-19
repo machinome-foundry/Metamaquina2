@@ -4,7 +4,7 @@
 # End Foundry notice
 """A Y endstop: two lasercut spacers and a switch."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.electronics.endstops.microswitch import Microswitch
 from metamaquina2.electronics.endstops.wood_spacer import YEndstopSpacer

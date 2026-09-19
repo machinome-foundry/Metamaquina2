@@ -18,7 +18,7 @@ extrusion.  Neither is a node the project instantiates; both are bases.
 """
 
 from solid2.core.object_base import OpenSCADObject
-from solid_node.node import Solid2Node
+from machinome.node import Solid2Node
 
 from metamaquina2 import materials
 from metamaquina2.params import thickness

@@ -4,7 +4,7 @@
 # End Foundry notice
 """The two vertical smooth rods that guide the X stage."""
 
-from solid_node.node import AssemblyNode
+from machinome.node import AssemblyNode
 
 from metamaquina2.hardware.smooth_rod import SmoothRod
 from metamaquina2.params import (
