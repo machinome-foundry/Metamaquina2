@@ -8,6 +8,7 @@ import math
 
 from molejo import P, Shape, Wrap
 from machinome.motion.ports import TranslationalPort
+from machinome_mechanics import rolling_angle, rolling_travel
 
 from metamaquina2 import gt2
 from metamaquina2.hardware.gt2_pulley import TEETH
@@ -171,19 +172,20 @@ def pulley_angle(position):
     teeth by construction, so it is a whole number of this pulley's
     grooves too, and the pulley cannot tell one from another.
 
-    Written as arithmetic rather than through `math.degrees`, because
-    `position` is not always a number: the serialization pass drives the
-    tree symbolically, and what comes through then is an expression in
-    the machine's own `y` for the viewer to turn the pulley by.
+    The tangent phase is a numeric construction constant, so
+    `math.degrees` converts it directly.  The travel is not always a
+    number: the serialization pass drives the tree symbolically, and
+    `rolling_angle` keeps the resulting expression in the machine's own
+    `y` for the viewer to turn the pulley by.
     """
     anchor = (position - CLAMP_ORIGIN) * gt2.span_scale(CIRCLES, CLAMP_SPAN)
     gone = STATIONS[2 * CLAMP_SPAN] + anchor - STATIONS[PULLEY_ARC]
-    turn = PULLEY_PHASE + gone / (PULLEY_RADIUS + gt2.PITCH_LINE)
-    return turn * 180 / math.pi
+    return (math.degrees(PULLEY_PHASE)
+            + rolling_angle(gone, PULLEY_RADIUS + gt2.PITCH_LINE))
 
 
 #: Millimetres of belt per degree of pulley: the pitch arc.
-PITCH_ARC = math.pi * (PULLEY_RADIUS + gt2.PITCH_LINE) / 180
+PITCH_ARC = rolling_travel(1, PULLEY_RADIUS + gt2.PITCH_LINE)
 
 #: What a degree of pulley is worth along the bed's rods -- the pitch
 #: arc read back through the clamped run's own tilt, which is the
