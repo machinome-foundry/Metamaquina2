@@ -8,7 +8,7 @@ import math
 
 from molejo import P, Shape, Wrap
 from machinome.motion.ports import TranslationalPort
-from machinome_mechanics import rolling_angle, rolling_travel
+from machinome_mechanics import belt_pulley_angle, rolling_travel
 
 from metamaquina2 import gt2
 from metamaquina2.hardware.gt2_pulley import TEETH
@@ -147,12 +147,13 @@ def pulley_angle(position):
     The tangent phase is a numeric construction constant, so
     `math.degrees` converts it directly.  The travel is not always a
     number: the serialization pass drives the tree symbolically, and
-    `rolling_angle` keeps the resulting expression in the machine's own
-    `x` for the viewer to turn the pulley by.
+    `belt_pulley_angle` keeps the resulting expression in the machine's
+    own `x` for the viewer to turn the pulley by.
     """
     anchor = (position - CLAMP_ORIGIN) * gt2.span_scale(CIRCLES, CLAMP_SPAN)
-    return (math.degrees(PULLEY_PHASE)
-            + rolling_angle(-anchor, PULLEY_RADIUS + gt2.PITCH_LINE))
+    return belt_pulley_angle(
+        anchor, PULLEY_RADIUS + gt2.PITCH_LINE,
+        math.degrees(PULLEY_PHASE))
 
 
 #: Millimetres of belt per degree of pulley: the pitch arc.
