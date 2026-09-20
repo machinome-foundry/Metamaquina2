@@ -187,7 +187,8 @@ import math
 import numpy
 from molejo import Polygon, Teeth
 from machinome.node import MolejoNode
-from machinome_mechanics import belt_tangent_points, pulley_pitch_radius
+from machinome_mechanics import (
+    belt_path_metrics, pulley_pitch_radius)
 
 from metamaquina2 import materials
 from metamaquina2.scad import scad_sources
@@ -475,7 +476,7 @@ def length(circles):
     What a catalogue calls the belt's length, and what molejo divides by
     the tooth count to get the pitch it actually draws at.
     """
-    return sum(span[2] for span in spans(circles)) + sum(_arcs(circles))
+    return _metrics(circles)['length']
 
 
 def span_origin(circles, span):
@@ -516,18 +517,7 @@ def spans(circles):
     the two senses agree that is the external tangent; where they differ
     it is the internal one, which crosses between the centres.
     """
-    normals = _normals(circles)
-    result = []
-    for index, normal in enumerate(normals):
-        following = (index + 1) % len(circles)
-        here, there = circles[index], circles[following]
-        start, end = belt_tangent_points(
-            here['center'], here['radius'],
-            there['center'], there['radius'],
-            _sense(here), _sense(there))
-        result.append((start, (normal[1], -normal[0]),
-                       math.hypot(end[0] - start[0], end[1] - start[1])))
-    return result
+    return list(_metrics(circles)['spans'])
 
 
 def stations(circles):
@@ -540,16 +530,7 @@ def stations(circles):
     arc, so converting between the two needs to know where both of them
     begin.
     """
-    lengths = []
-    arcs = _arcs(circles)
-    for index, span in enumerate(spans(circles)):
-        lengths.append(span[2])
-        lengths.append(arcs[index])
-    travelled, at = [], 0.0
-    for length in lengths:
-        travelled.append(at)
-        at += length
-    return travelled
+    return list(_metrics(circles)['stations'])
 
 
 def _sense(circle):
@@ -561,59 +542,20 @@ def _sense(circle):
 def _arcs(circles):
     """How much belt is wrapped around each circle, in order.
 
-    The belt arrives on the normal of the span before a circle and
-    leaves on the normal of the span after it, and turns between the two
-    the way that circle's sense says.  What it arrives at is the point a
-    radius along that normal or a radius against it, so the angles are
-    taken from the signed normal rather than the normal itself.
+    The project's order places each arc after the span that reaches it,
+    while mechanics reports arcs by the circle they wrap.  Rotate that
+    circle-indexed result once so span 0 is still followed by circle 1.
     """
-    normals = _normals(circles)
-    lengths = []
-    for index in range(len(circles)):
-        following = (index + 1) % len(circles)
-        onward = _sense(circles[following])
-        arrival = math.atan2(onward * normals[index][1],
-                             onward * normals[index][0])
-        departure = math.atan2(onward * normals[following][1],
-                               onward * normals[following][0])
-        turn = (onward * (arrival - departure)) % (2 * math.pi)
-        lengths.append(circles[following]['radius'] * turn)
-    return lengths
+    circle_arcs = _metrics(circles)['arc_lengths']
+    return list(circle_arcs[1:] + circle_arcs[:1])
 
 
-def _normals(circles):
-    """The normal the belt touches each circle on, in order."""
-    normals = []
-    for index in range(len(circles)):
-        following = (index + 1) % len(circles)
-        here, there = circles[index], circles[following]
-        here_sense, there_sense = _sense(here), _sense(there)
-        start, end = belt_tangent_points(
-            here['center'], here['radius'],
-            there['center'], there['radius'], here_sense, there_sense)
-
-        here_reach = here_sense * here['radius']
-        there_reach = there_sense * there['radius']
-        if here_reach:
-            normal = ((start[0] - here['center'][0]) / here_reach,
-                      (start[1] - here['center'][1]) / here_reach)
-        elif there_reach:
-            normal = ((end[0] - there['center'][0]) / there_reach,
-                      (end[1] - there['center'][1]) / there_reach)
-        else:
-            between = (there['center'][0] - here['center'][0],
-                       there['center'][1] - here['center'][1])
-            distance = math.hypot(*between)
-            normal = (-between[1] / distance, between[0] / distance)
-        normals.append(normal)
-    return normals
-
-
-def _touch(circle, normal):
-    """Where a belt running on `normal` touches `circle`."""
-    reach = _sense(circle) * circle['radius']
-    return (circle['center'][0] + reach * normal[0],
-            circle['center'][1] + reach * normal[1])
+def _metrics(circles):
+    """Mechanics metrics adapted from project circle dictionaries."""
+    return belt_path_metrics(
+        [circle['center'] for circle in circles],
+        [circle['radius'] for circle in circles],
+        [_sense(circle) for circle in circles])
 
 
 class Belt(MolejoNode):

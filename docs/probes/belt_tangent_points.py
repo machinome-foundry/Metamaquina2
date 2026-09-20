@@ -27,13 +27,19 @@ def legacy_normal(here, there):
             delta * unit[1] + sideways * unit[0])
 
 
+def legacy_touch(circle, normal):
+    reach = gt2._sense(circle) * circle['radius']
+    return (circle['center'][0] + reach * normal[0],
+            circle['center'][1] + reach * normal[1])
+
+
 def legacy_spans(circles):
     result = []
     for index, here in enumerate(circles):
         there = circles[(index + 1) % len(circles)]
         normal = legacy_normal(here, there)
-        start = gt2._touch(here, normal)
-        end = gt2._touch(there, normal)
+        start = legacy_touch(here, normal)
+        end = legacy_touch(there, normal)
         result.append((start, (normal[1], -normal[0]),
                        math.hypot(end[0] - start[0], end[1] - start[1])))
     return result
@@ -87,6 +93,10 @@ routes = {
         {'center': [0, 0], 'radius': 2},
         {'center': [20, 0], 'radius': 2},
     ],
+    'limiting-inner': [
+        {'center': [0, 0], 'radius': 2},
+        {'center': [5, 0], 'radius': 3, 'turn': 'counterclockwise'},
+    ],
 }
 
 for name, circles in routes.items():
@@ -117,8 +127,9 @@ for name, circles in degenerate.items():
     assert math.isclose(old_length, gt2.length(circles),
                         rel_tol=0.0, abs_tol=1e-12)
     assert close_nested(tuple(old_stations), tuple(gt2.stations(circles)))
+    normals = [(-span[1][1], span[1][0]) for span in new]
     assert all(math.isclose(math.hypot(*normal), 1.0)
-               for normal in gt2._normals(circles))
+               for normal in normals)
     print(name, 'span/normal parity', new)
 
 # Exercise the helper's supported deferred-expression face.  The mechanics
