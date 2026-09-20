@@ -5,7 +5,7 @@
 
 ## 2. What a compression spring is
 
-- [x] 2.1 Write `metamaquina2/spring.py`: `wire()` deriving wire thickness from the catalogue diameter, the shank bore and a declared bore clearance; `turns()` deriving the coil count from an installed length and that wire
+- [x] 2.1 Write `simulation/spring.py`: `wire()` deriving wire thickness from the catalogue diameter, the shank bore and a declared bore clearance; `turns()` deriving the coil count from an installed length and that wire
 - [x] 2.2 Add the `Spring(MolejoNode)` base: metal colour, a `height` `TranslationalPort`, the design's .scad source set in its own file set, and a `render()` returning a `Circle` section swept along one `Helix` at `P.height`
 - [x] 2.3 Declare the sweep's tessellation per turn rather than per spring, so a six-turn and a ten-turn spring are drawn to the same fineness
 - [x] 2.4 Record on the class that the helix's own length is one wire diameter short of the space the spring occupies, and that the end coils are neither closed nor ground

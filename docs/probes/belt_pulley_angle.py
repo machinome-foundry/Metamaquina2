@@ -6,8 +6,8 @@ import re
 from machinome.core.expressions import parse, render
 from solid2 import get_animation_time
 
-from metamaquina2.x_stage import x_belt
-from metamaquina2.y_axis import y_belt
+from simulation.x_stage import x_belt
+from simulation.y_axis import y_belt
 
 
 def evaluate(expression, time):

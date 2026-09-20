@@ -34,7 +34,7 @@ Commands ran from this repository using the workspace virtual environment,
 `PYTHONPATH="$PWD:/home/asa/devel/machinome-studio/WTs/mechanics-pulley-pitch-radius"`,
 and an isolated `SOLID_BUILD_DIR=_build/pulley-pitch-radius`.
 
-`machinome test metamaquina2/metamaquina2.py --exact` ran 67 tests in
+`machinome test simulation/metamaquina2.py --exact` ran 67 tests in
 453.23 seconds: 67 passed, 0 failed.  Relevant passing contracts include the
 bought motor-pulley radius, X-end pulley dimension, X and Y pulley/belt mesh,
 belt tooth travel, and one groove per belt tooth.  The build repeated the
@@ -42,7 +42,7 @@ existing `jhead.scad` line-107 parser diagnostic while completing normally.
 
 The representative web snapshot command was:
 
-`machinome snapshot metamaquina2/metamaquina2.py -o _build/pulley-pitch-radius-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
+`machinome snapshot simulation/metamaquina2.py -o _build/pulley-pitch-radius-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
 
 Visual inspection is limited to the whole-machine exterior pose: carriage and
 bed displacement, frame, raised beam, hot end, and filament run are coherent.

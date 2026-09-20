@@ -46,7 +46,7 @@ test.
 
 ## 2. Own-frame restatement (ADR-097)
 
-- [x] 2.1 `YPulley.spin` (`metamaquina2/y_axis/motor/y_motor.py`):
+- [x] 2.1 `YPulley.spin` (`simulation/y_axis/motor/y_motor.py`):
 
           spin = Revolute(axis=(-1, 0, 0), at=(0.0, SHAFT[0], SHAFT[1]),
                           unit='deg')
@@ -64,7 +64,7 @@ test.
       R(θ,axis)` for any anchor parallel to axis), so it is dropped
       rather than renumbered. Docstring rewritten to state the carry in
       words instead of narrating the now-deleted anchor.
-- [x] 2.2 `XPulley.spin` (`metamaquina2/x_stage/ends/motor/belt_side.py`):
+- [x] 2.2 `XPulley.spin` (`simulation/x_stage/ends/motor/belt_side.py`):
 
           spin = Revolute(axis=(0, 0, 1),
                           at=(XEnd_box_size / 2, XMotor_height, 0.0),
@@ -90,7 +90,7 @@ test.
 
 ## 3. Hand-turned to declared (ADR-096 + ADR-097)
 
-- [x] 3.1 `metamaquina2/hardware/threaded_rod.py`: added
+- [x] 3.1 `simulation/hardware/threaded_rod.py`: added
       `SpinningThreadedRod(ThreadedRod)` declaring
       `spin = Revolute(axis=(0, 0, 1), unit='deg')`, no `at`. Plain
       `ThreadedRod` (used unturned by `frame/bars/front_bars.py` and
@@ -98,11 +98,11 @@ test.
       framework survey's own OPEN QUESTION in favour of a dedicated
       subclass, so the frame's four static bars never carry an unused
       joint.
-- [x] 3.2 `metamaquina2/hardware/shaft_coupling.py`: added
+- [x] 3.2 `simulation/hardware/shaft_coupling.py`: added
       `spin = Revolute(axis=(0, 0, 1), unit='deg')` directly on
       `ShaftCoupling` — it has no other consumer, so there is no
       OPEN QUESTION here.
-- [x] 3.3 `metamaquina2/z_axis/z_bars.py`: `bars = ThreadedRod(...)`
+- [x] 3.3 `simulation/z_axis/z_bars.py`: `bars = ThreadedRod(...)`
       becomes `bars = SpinningThreadedRod(...)`. Added the class-body
       relation `angle.drives(bars.spin)`, fanning out over both
       `.repeat(2)` copies. Deleted:
@@ -114,12 +114,12 @@ test.
       `render()` is unchanged. Docstring rewritten: the paragraph that
       described `simulate()` turning the bars now describes the
       declared `spin` joint and the one relation driving both copies.
-- [x] 3.4 `metamaquina2/z_axis/z_couplings.py`: same shape. Added
+- [x] 3.4 `simulation/z_axis/z_couplings.py`: same shape. Added
       `angle.drives(couplings.spin)`; deleted
       `simulate()`'s hand `.rotate()` loop; docstring rewritten the
       same way.
 - [x] 3.5 Sanity check before running the suite:
-      `PYTHONPATH=. .venv/bin/python -c "from metamaquina2.metamaquina2
+      `PYTHONPATH=. .venv/bin/python -c "from simulation.metamaquina2
       import Metamaquina2; Metamaquina2()"` constructs without error.
 
 ## 4. Evidence

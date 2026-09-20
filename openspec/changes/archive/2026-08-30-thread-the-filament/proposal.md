@@ -31,7 +31,7 @@ design's own Ø160.
 - Filament becomes a leaf kind this project knows: a molejo sweep of the
   3 mm section the design names, along a path that is one helix — the layer
   lying on the reel — continued by one spline — the free run to the machine.
-  `metamaquina2/filament.py` holds what filament is here, the way `spring.py`
+  `simulation/filament.py` holds what filament is here, the way `spring.py`
   holds what a compression spring is and `gt2.py` what a belt is.
 - **The layer is derived, not chosen.** Its centre line runs half a stock
   diameter inside the reel's own outside diameter, its pitch is the stock's
@@ -109,18 +109,18 @@ Not in this change, and deliberately:
 
 ## Impact
 
-- `metamaquina2/filament.py` — new: what filament is here, and the strand as
+- `simulation/filament.py` — new: what filament is here, and the strand as
   a molejo leaf.
-- `metamaquina2/spool_holder/spool.py` — the tube is what is wound under the
+- `simulation/spool_holder/spool.py` — the tube is what is wound under the
   outermost layer.
-- `metamaquina2/spool_holder/spool_holder.py` — publishes the height it
+- `simulation/spool_holder/spool_holder.py` — publishes the height it
   stands the reel at.
-- `metamaquina2/x_stage/carriage/extruder/extruder.py`,
-  `metamaquina2/x_stage/carriage/x_carriage.py`,
-  `metamaquina2/x_stage/x_stage.py` — publish where the filament channel
+- `simulation/x_stage/carriage/extruder/extruder.py`,
+  `simulation/x_stage/carriage/x_carriage.py`,
+  `simulation/x_stage/x_stage.py` — publish where the filament channel
   opens, each in its own frame.
-- `metamaquina2/metamaquina2.py` — the strand as a child of the machine, its
+- `simulation/metamaquina2.py` — the strand as a child of the machine, its
   three ports bound, and the module docstring.
-- `metamaquina2/params.py` — the stock diameter, and the channel restated
+- `simulation/params.py` — the stock diameter, and the channel restated
   from a module body.
-- `metamaquina2/test_metamaquina2.py` — the contracts below.
+- `simulation/test_metamaquina2.py` — the contracts below.

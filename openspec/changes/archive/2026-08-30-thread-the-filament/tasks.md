@@ -6,7 +6,7 @@
 
 ## 2. What filament is here
 
-- [x] 2.1 Write `metamaquina2/filament.py`: the layer's radius, pitch and turn count derived from the reel and the stock, and the frame the strand's own path is authored in
+- [x] 2.1 Write `simulation/filament.py`: the layer's radius, pitch and turn count derived from the reel and the stock, and the frame the strand's own path is authored in
 - [x] 2.2 Add the `Filament(MolejoNode)` leaf: ABS colour, `TranslationalPort`s for the two places the free run is pinned, the design's .scad source set in its own file set, and a `render()` returning a `Circle` section swept along one `Helix` continued by one `Spline`
 - [x] 2.3 Declare the sweep's tessellation per turn rather than per strand, as the springs do, and record what it costs the free run that molejo spends the same budget on every element of a path
 - [x] 2.4 Record on the module why the coil is one layer and not a reel, why the run leaves the reel at whole turns, and how a machine point is read in the strand's own frame

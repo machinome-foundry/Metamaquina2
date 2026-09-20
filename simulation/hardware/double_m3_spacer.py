@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes
+# Upstream Metamaquina design retains its own notices and grants; see NOTICE.
+# End Foundry notice
+"""Two lasercut M3 spacers, stacked."""
+
+from machinome.node import AssemblyNode
+
+from simulation.hardware.m3_spacer import M3Spacer
+from simulation.params import thickness
+
+
+class DoubleM3Spacer(AssemblyNode):
+    """The design's `double_M3_lasercut_spacer`: two separate pieces.
+
+    They are stacked, not fused -- each is cut on its own and the two
+    are only held together by the bolt through them, so this is an
+    assembly of two spacers rather than one part twice as thick.
+    """
+
+    lower = M3Spacer()
+    upper = M3Spacer()
+
+    def render(self):
+        self.upper.translate([0, 0, thickness])

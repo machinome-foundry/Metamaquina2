@@ -50,7 +50,7 @@ All project commands used the workspace virtual environment,
 `PYTHONPATH="$PWD:/home/asa/devel/machinome-studio/WTs/mechanics-belt-path-metrics"`,
 and isolated `SOLID_BUILD_DIR=_build/belt-path-metrics`.
 
-Before the seam correction, `machinome test metamaquina2/metamaquina2.py
+Before the seam correction, `machinome test simulation/metamaquina2.py
 --exact` ran 67 tests in 421.84 seconds: 67 passed, 0 failed.  After the
 correction, the same command reran against the final helper source and ran 67
 tests in 203.04 seconds: 67 passed, 0 failed.  Relevant contracts include both
@@ -58,11 +58,11 @@ closed flexible loops, X and Y belt redraw/travel, idler routing, pulley mesh,
 and one groove per belt tooth.  The existing `jhead.scad` line-107 parser
 diagnostic occurred during the cold build but did not prevent completion.
 
-After the corrected run, `machinome build metamaquina2/metamaquina2.py`
+After the corrected run, `machinome build simulation/metamaquina2.py`
 completed successfully in the same isolated build directory and reported the
 published artifacts current.  The fresh representative image command was:
 
-`machinome snapshot metamaquina2/metamaquina2.py -o _build/belt-path-metrics-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
+`machinome snapshot simulation/metamaquina2.py -o _build/belt-path-metrics-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
 
 Visual inspection is limited to the whole-machine exterior pose: carriage and
 bed displacement, frame, raised beam, hot end, and filament run are coherent.

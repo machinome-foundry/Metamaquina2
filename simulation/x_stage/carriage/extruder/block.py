@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes
+# Upstream Metamaquina design retains its own notices and grants; see NOTICE.
+# End Foundry notice
+"""The extruder body: five slices stacked."""
+
+from machinome.node import AssemblyNode
+
+from simulation.params import thickness
+from simulation.x_stage.carriage.extruder.slice import ExtruderSlice
+
+
+class ExtruderBlock(AssemblyNode):
+    """The five slices, bolted through as one block.
+
+    They are bolted, not glued, so this is an assembly: five parts a
+    builder stacks in order and pulls together with five M3x35.
+    """
+
+    slices = [ExtruderSlice(number=number)
+              for number in range(1, ExtruderSlice.count + 1)]
+
+    def render(self):
+        for number, slice_ in enumerate(self.slices, start=1):
+            slice_.translate([0, 0, (number - 1) * thickness])

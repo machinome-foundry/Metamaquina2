@@ -1,0 +1,578 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes
+# Upstream Metamaquina design retains its own notices and grants; see NOTICE.
+# End Foundry notice
+"""The GT2 timing belt both driven axes run, and the pulley it meshes on.
+
+The OpenSCAD design draws a belt as a 2 mm thick ring hulled around the
+things it wraps.  That is enough to see where the loop goes, and all a
+still drawing needs, but it is not a belt: it has no teeth, and it does
+not move.  A real belt has both, and the two are the same fact -- the
+teeth are what the carriage is clamped to, so when the carriage travels
+the teeth travel with it, through a loop that itself stands still.  That
+is a shape to be re-drawn at every position rather than a solid to be
+moved, which is what a flexible leaf is for.
+
+This module holds what the two belts share, and what the pulley one of
+them meshes on shares with it: what GT2 *is*.  The numbers here are the
+belt standard's, because the design has none -- it never drew a tooth,
+and its `GT2_pulley` module is an empty stub with a bill-of-materials
+line and a `//TODO: implement-me!` inside it.  The design's own numbers
+stay in `params` and arrive as arguments: which circles a belt runs,
+how wide it is, and which radius it was drawn around.
+
+molejo authors a belt as a `Wrap`: an ordered list of circles in the XY
+plane, run along their external tangents, clockwise seen from +Z, with
+the belt's width along +Z and the swept path being the belt's *pitch
+line*.  Three consequences shape everything below.
+
+* The circles a wrap takes are pitch circles, so a contact radius read
+  off the design has to be converted -- and the conversion differs
+  between a toothed pulley, whose grooves swallow the teeth, and a plain
+  bearing, which the tooth tips ride on.  Hence `on_pulley` and
+  `on_idler` rather than one function.
+* The circles must be ordered clockwise, and each carries which way the
+  belt turns about it -- clockwise for one inside the loop, the other
+  way for one the belt is bent backwards over.  The design lists the Y
+  belt's three idlers the other way round, so that node lists them
+  reversed: the same loop, run the way molejo runs it, with the motor
+  pulley put in between the two at the rear.
+* A belt clamped to a carriage is anchored at a distance *along* one
+  tangent span, while a carriage is at a position along the machine's
+  axis.  Converting between the two needs to know where the span starts
+  and how it is tilted.  molejo computes both internally and publishes
+  neither, so `span_origin` and `span_scale` below restate its
+  external-tangent rule.
+* The tooth form is likewise molejo's, published only as the displaced
+  mesh it draws, and a pulley the belt meshes on has to be that form's
+  exact negative -- so `modulation` restates it too.  Those two
+  restatements are the pieces of this module that would rather live in
+  molejo.
+
+Why the belts were done now
+---------------------------
+
+This branch exists to put machinome's new flexible leaf in front of a
+real machine rather than a sample one, and to say honestly what happened.
+
+What worked: both belts are `MolejoNode` leaves under the axis that
+drives them; each declares one port, the clamp its ends are held by, and
+the axis wires that port from the same carriage position it places the
+carriage with.  The teeth follow the carriage exactly -- a whole tooth of
+travel redraws the belt identically, half a tooth moves a crest to a root
+and not a micron further -- and both loops come out watertight, and exact
+as OCCT solids to the tolerance molejo declares for a tooth ramp crossing
+an arc.  They serialize as shapes rather than meshes, so whatever opens
+the model redraws them itself.
+
+What it cost, and what it found:
+
+* A belt with teeth is drawn at the radius it really rides at, and that
+  turned up a millimetre of nonsense the hulled ring had hidden: the
+  design writes the Y loop's height down as a literal 66 while placing
+  the bearings it runs on from `base_bars_height + base_bars_Zdistance`,
+  which is 67.  The node derives it; see `y_axis.YAxis`.
+* The interference assertion the framework offers cannot be used on a
+  belt.  `assertNotIntersecting` takes an exact path only when both
+  parts are exact, and every part of this machine but the belts is
+  OpenSCAD; the mesh path it falls back to reaches for a cached STL,
+  which a flexible part does not have and never writes.  It raises
+  `FileNotFoundError` -- or, worse, quietly answers from the stale
+  artifact a rigid part of the same name left behind, which is exactly
+  what happened here first.  `assertRidesOn` in the test module takes
+  the boolean itself and says why.
+* A wrap's tessellation is spent per element, and a wrap has two
+  elements per circle, so the 19 mm of arc at the end of the X beam is
+  sampled as finely as the 375 mm run that carries 190 teeth.  See
+  `PATH_SAMPLES`.
+
+And what the pulley then found
+------------------------------
+
+The X belt is drawn meshed on a pulley, so the pulley had to become a
+part rather than a radius, and asking which pulley it is turned up
+three more things the stub had hidden.
+
+* `PulleyRadius` was 6, and 6 is not a GT2 pulley.  A belt meshed on
+  it wraps a pitch circle of 6.254, which carries 19.66 teeth -- and a
+  pulley has a whole number of them or it does not mesh.  Which pulley
+  it should have been is not a matter of rounding, because the design
+  says: it buys "GT2 pulley 6mm x 16 teeth" at each belt motor, and
+  sixteen teeth ride a belt at 4.839.  A round 6 is a millimetre and a
+  sixth outside that -- the belt line the whole X end is dimensioned
+  from, since `XIdler_height` and `X_rod_height` are both derived from
+  this number.  So the design now derives it too, from the sixteen
+  teeth it buys, and those two heights came down 1.161 mm with it.
+  The design's own `XBelt` had the 6 a second time as a literal, where
+  the parameter belongs, so it could not have followed; it does now.
+  See `pulley_teeth`, and `x_stage.x_belt.PULLEY_RADIUS` for the loop
+  that closes on it.
+* Both pulleys are placed somewhere their belt is not.  The X one is
+  put one `thickness` off the plate it hangs behind, 6 mm out of the
+  plane its own belt runs in; the Y one is left at the origin of the
+  motor's assembly, 72 mm off the shaft.  Nothing showed while
+  `GT2_pulley` drew nothing.  Both are placed from the belt instead;
+  see `x_stage.ends.motor.belt_side` and `y_axis.motor.y_motor`.
+* A trapezoidal tooth cannot get out of a trapezoidal groove, so a
+  pulley drawn as the exact negative of its belt bites it at the two
+  places where a tooth is halfway through.  A groove is the shape of
+  everything a tooth does on its way in and out, which is `groove`,
+  and which is what the curved grooves of a real timing pulley are.
+
+Everything left after that is microns, and it is not chased.  Two
+surfaces meeting exactly is a precision neither a moulded belt nor a
+machined pulley has, and one a mesh boolean cannot even be asked about,
+so the pulley is cut a tenth of a millimetre inside the belt all round
+-- about the backlash such a pair really runs with, and well inside
+what the rubber takes up by flexing.  See
+`hardware.gt2_pulley.GT2Pulley.CLEARANCE`.
+
+The one micron that is chased is the pulley's own pitch, which is cut
+to the belt's rather than to the standard's.  Not for clearance, which
+would swallow it, but because a tooth of belt is one groove of pulley
+only when the two circles are the same circle, and a drive ratio ought
+not to have a number in it that nothing chose.
+
+And what the Y loop then found
+------------------------------
+
+The Y motor got the same part and, at first, no mesh at all: the loop
+the design draws runs three bare bearings and passes 22 mm clear of the
+pulley, so there was nothing for those teeth to engage and no angle to
+derive.  A belt that reaches no motor is not a drive, and the machine it
+is drawn from is driven -- so the loop was wrong, not the pulley.
+
+What the machine really does is what the two rear bearings are for.
+They stand 58 mm apart with the motor 40 mm inside the line between
+them, and the belt is threaded *between* them and *over* the pulley:
+it leaves the upper bearing on an internal tangent, hugs the pulley from
+the far side through 156 degrees, and crosses back out to the lower one.
+The loop is concave there where it is convex everywhere else, which is a
+reverse bend, and a reverse bend is how a belt is driven from outside
+its own circuit.
+
+Two things follow, and they are the same thing said twice.
+
+* The teeth are on the other face.  A belt has teeth on one side; on the
+  X loop that side faces in, because its pulley is inside the circuit.
+  On the Y loop it faces out, so the three bare 608 races carry the
+  smooth back -- which is what a bare race is for -- and the toothed
+  face is the one that comes round onto the pulley at the bend.  The
+  belt's material sits in exactly the same band either way; only the
+  pitch line moves inside it.  See `section` and `on_idler`.
+* The belt turns the other way about that one circle, and the profile
+  frame turns with it: local x swings from pointing away from a circle
+  to pointing at it, which is precisely what puts the outward face
+  against the pulley.  The sign shows up again in `y_belt.pulley_angle`,
+  where belt running on turns this pulley the opposite way to the X one.
+
+Neither was something molejo could draw.  A v1 wrap runs the external
+tangents of every circle and displaces the profile's inner face only, so
+both had to be added there -- a `turn` on a circle and a `face` on the
+teeth -- and this module's restatement of the wrap rule in `spans`,
+`_arcs` and `_normals` follows it: each radius signed by its sense.
+
+One mismatch between the design and its own bill of materials is left
+standing, because it is the design's to settle: the BOM buys 6 mm belt
+and 6 mm pulleys, and `belt_width` is 5.  The pulleys are drawn at the
+6 mm they are bought at, since that is the part; the belts are left at
+the width the design draws, since that width places the carriage's
+clamps and the idler's slot and nothing says which of the two numbers
+was meant.  So each pulley stands half a millimetre proud of its belt
+on either side, which is what a pulley wider than its belt looks like.
+"""
+
+import math
+
+import numpy
+from molejo import Polygon, Teeth
+from machinome.node import MolejoNode
+from machinome_mechanics import (
+    belt_path_metrics, pulley_pitch_radius)
+
+from simulation import materials
+from simulation.scad import scad_sources
+
+
+#: The pitch of GT2, and what the standard is named after.
+PITCH = 2.0
+
+#: How far a tooth stands proud of the land between two teeth.
+TOOTH_HEIGHT = 0.75
+
+#: The belt's whole section, back and tooth together.
+THICKNESS = 1.38
+
+#: The pitch line differential: how far the pitch line -- the neutral
+#: line a belt's length is measured along, and the line molejo sweeps
+#: the section along -- lies outside the land between two teeth.  It is
+#: what makes a 20 tooth pulley 12.32 mm across the flanks and 12.73 mm
+#: across the pitch circle.
+PITCH_LINE = 0.254
+
+#: The back of the belt, from the pitch line outwards.
+BACK = THICKNESS - TOOTH_HEIGHT - PITCH_LINE
+
+#: How many rings molejo spends on each element of a loop.
+#:
+#: A wrap's tessellation is per element and a wrap has two elements per
+#: circle -- one tangent span and one arc -- so every element gets this
+#: many rings whether it is the 375 mm run down the X beam or the 19 mm
+#: of arc at the end of it.  The long run is what sets the number: it
+#: carries around 190 teeth, and a trapezoid needs several samples
+#: across to read as a trapezoid rather than as noise.  A thousand is
+#: the compromise this design is drawn at -- five or six rings a tooth
+#: on the longest element, generous everywhere else -- and it is a
+#: sampling instruction only: the exact solid and the loop's own
+#: measurements are analytic and do not depend on it.
+PATH_SAMPLES = 1024
+
+
+def section(width, face='inner'):
+    """The belt's cross-section, as molejo takes it.
+
+    In a wrap's profile frame local x is the outward normal and local y
+    is the world +Z the belt's width runs along, so this is the belt
+    seen end-on.  The points run counter-clockwise, which is molejo's
+    winding, and the two on the face named by `face` are the ones `Teeth`
+    displaces.
+
+    A belt has teeth on one face and which one is the loop's business
+    rather than the section's.  The X loop is driven from inside its own
+    circuit, so its teeth are on the inner face, at the minimum x; the Y
+    loop is driven from outside it, over a reverse bend, so its teeth are
+    on the outer face and its smooth back is what rides the three
+    bearings.  Either way the belt is `THICKNESS` thick and the pitch
+    line sits `PITCH_LINE` in from the toothed side of it; all that moves
+    is which side that is.
+
+    The width runs from nought to `width` rather than either side of
+    nought, so that a node placing this loop places it exactly where the
+    design's own ``linear_extrude(belt_width)`` put its hulled ring.
+    """
+    if face == 'outer':
+        inner, outer = -BACK, PITCH_LINE
+    else:
+        inner, outer = -PITCH_LINE, BACK
+    return Polygon([
+        (inner, 0.0),
+        (outer, 0.0),
+        (outer, width),
+        (inner, width),
+    ])
+
+
+def on_pulley(centre, radius, turn='clockwise'):
+    """The pitch circle of a belt meshed on a toothed pulley.
+
+    The pulley's teeth stand in the gaps between the belt's, so what
+    touches the pulley's flank circle is the land between two teeth, and
+    the pitch line is one pitch line differential outside it.  That is
+    true of a pulley inside the loop and of one the belt is bent
+    backwards over alike -- the belt is the same distance from the metal
+    either way -- so `turn` changes only which side of the belt is
+    against it, and molejo is what is told about that.
+    """
+    circle = {'center': [centre[0], centre[1]], 'radius': radius + PITCH_LINE}
+    if turn != 'clockwise':
+        circle['turn'] = turn
+    return circle
+
+
+def on_idler(centre, radius, face='inner'):
+    """The pitch circle of a belt running on a plain bearing.
+
+    Every idler in both machines is a 608 bearing with nothing to mesh
+    with, so what it carries is whichever face of the belt happens to be
+    against it.  A belt with its teeth inward rides on its tooth *tips*,
+    a whole tooth out from where it would sit on a pulley; a belt with
+    its teeth outward presents its smooth back instead, which is only
+    `BACK` out.  The two put the belt's material in exactly the same
+    band -- it is `THICKNESS` thick and its inner face is on the race
+    either way -- and move only the pitch line inside it.
+    """
+    reach = BACK if face == 'outer' else TOOTH_HEIGHT + PITCH_LINE
+    return {'center': [centre[0], centre[1]], 'radius': radius + reach}
+
+
+def pulley_teeth(radius):
+    """How many teeth a pulley whose flanks stand at `radius` carries.
+
+    `tooth_count` read the other way, for a circle instead of a loop: a
+    pulley's flank circle is one pitch line differential inside the
+    pitch circle the belt runs on, and that circle carries a whole
+    number of nominal pitches.  A design that writes a pulley down as a
+    radius rather than as a tooth count -- as this one does, in
+    `PulleyRadius` -- has named it by a number that can name no pulley
+    at all, and this says which one it did name.  That is how the round
+    6 was caught, and it is how the number that replaced it is checked
+    against the pulley the bill of materials buys.
+    """
+    return round(2 * math.pi * (radius + PITCH_LINE) / PITCH)
+
+
+def pulley_radius(teeth, period=PITCH):
+    """Where the flanks of a pulley of `teeth` teeth stand.
+
+    `period` is the pitch its grooves are really spaced at, which for a
+    pulley meshed with a drawn loop is the loop's own `pitch` and not
+    the nominal `PITCH` a catalogue pulley is cut at: molejo divides a
+    loop's length by a whole tooth count rather than stepping 2 mm
+    around it, so a drawn loop comes out a fortieth of a percent off
+    the standard.  On the machine that difference is taken up in belt
+    tension.  In a drawing there is no tension to take it up with, so
+    the pulley is cut to the belt it drives instead.
+    """
+    return pulley_pitch_radius(teeth, period) - PITCH_LINE
+
+
+def modulation(fraction):
+    """How much tooth stands at `fraction` of the way through one
+    period: nought on the land between two teeth, one at a crest.
+
+    molejo's own tooth form, restated -- a quarter crest centred on the
+    pattern origin, a quarter ramp, a quarter root and a quarter ramp
+    back.  molejo publishes it only as the mesh it displaces, and a
+    pulley the belt meshes on is exactly this curve read as a solid's
+    boundary rather than as an offset, so the two cannot be allowed to
+    disagree.
+    """
+    fraction %= 1.0
+    away = min(fraction, 1.0 - fraction)
+    return max(0.0, min(1.0, (0.375 - away) * 4.0))
+
+
+#: How finely a tooth's way out of its groove is followed.
+#:
+#: The sampling is square: this many stations across one tooth, and
+#: this many advances for each of them, so a millionth of a tooth's
+#: passage is looked at.  It is deliberately far finer than the outline
+#: it feeds, which takes the deepest of a whole step at a time -- a
+#: missed sample can only ever leave a groove tighter than it should be,
+#: and the step is where that is made safe rather than here.
+PASSAGE_SAMPLES = 1024
+
+#: How far past the pitch circle a tooth is followed, in teeth.
+#:
+#: A crest sits 1.004 mm inside the pitch line, so it has cleared the
+#: flank circle once it is 2.93 mm along the straight run -- a tooth and
+#: a half.  Three is that with room, and the sampling stops early
+#: anyway: `_passage` drops every station the moment its tooth is out.
+PASSAGE_REACH = 3
+
+
+def _passage(teeth, period, bins):
+    """The deepest a tooth reaches into a pulley, by angle, on its way
+    out of the groove it was seated in.
+
+    A belt leaves a pulley along a tangent, so in the pulley's own frame
+    a tooth on the way out is a tooth on a straight line rolling off a
+    circle: it lifts out of its groove while the pulley turns under it,
+    and it sweeps.  Everything here follows from that one picture.  A
+    tooth seated at station `m` sits at pulley angle `m / pitch radius`
+    and stays there; once it is `run` past the tangent point it stands
+    at `hypot(seat, run)` from the centre, at an angle the pulley's own
+    turn has carried a further `run / pitch radius` on and the tangent
+    has swung `atan2(run, seat)` back.
+
+    A groove is cut once and every tooth goes through it, so the answer
+    is the deepest reach at each angle over the whole passage.  Coming
+    on is going off with time reversed, which is a reflection, so the
+    two halves are folded together at the end rather than derived
+    twice.
+    """
+    pitch_radius = pulley_pitch_radius(teeth, period)
+    flank = pitch_radius - PITCH_LINE
+
+    station = numpy.linspace(0.0, period, PASSAGE_SAMPLES, endpoint=False)
+    seat = pitch_radius - numpy.array(
+        [PITCH_LINE + TOOTH_HEIGHT * modulation(place / period)
+         for place in station])
+    run = numpy.linspace(0.0, PASSAGE_REACH * period, PASSAGE_SAMPLES)[1:]
+
+    radius = numpy.hypot(seat[:, None], run[None, :])
+    angle = (station[:, None] / pitch_radius
+             + run[None, :] / pitch_radius
+             - numpy.arctan2(run[None, :], seat[:, None]))
+
+    biting = radius < flank
+    tooth = 2 * math.pi / teeth
+    index = ((angle % tooth) / tooth * bins).astype(int) % bins
+
+    deepest = numpy.zeros(bins)
+    numpy.maximum.at(deepest, index[biting], (flank - radius)[biting])
+    return numpy.maximum(deepest, deepest[(-numpy.arange(bins)) % bins])
+
+
+def groove(teeth, period, steps, fine=16):
+    """How deep a pulley's groove is at each of `steps` points through
+    one tooth.
+
+    Not the tooth's own shape.  A tooth is a trapezoid and a trapezoid
+    cannot get out of a trapezoid: seat one exactly and it is trapped,
+    because leaving means swinging about the tangent point and the
+    corners have nowhere to swing to.  Drawn as the exact negative the
+    pulley bites its own belt at the two places where a tooth is
+    halfway in or halfway out -- two tenths of a cubic millimetre of
+    it, at the two ends of the wrap and nowhere else, which is what
+    sent this function looking.  So a groove is not the shape of a
+    tooth; it is the shape of everything the tooth does on its way
+    through, and the floor and the flat between two grooves come out
+    untouched while the flanks are scooped back by up to 0.17 mm.
+    That is what a real timing pulley's curved grooves are for.
+
+    Each returned point is the deepest reach anywhere within one step
+    either side of it, because a chord of the polygon this feeds stands
+    as far out as its outer end: a tooth passing between two points has
+    to clear both of them.  The over-cut that follows is flank
+    clearance, which is a thing a pulley has and a drawing usually
+    forgets, and it leaves the two surfaces that actually carry -- the
+    groove floor and the land between grooves -- exactly where they
+    were.
+    """
+    bins = steps * fine
+    needed = numpy.maximum(
+        _passage(teeth, period, bins),
+        [TOOTH_HEIGHT * modulation(index / bins) for index in range(bins)])
+    return [max(needed[(step * fine + offset) % bins]
+                for offset in range(-fine, fine + 1))
+            for step in range(steps)]
+
+
+def tooth_count(circles):
+    """How many teeth the loop through `circles` carries.
+
+    molejo takes the count as a declaration rather than deriving it,
+    because a count that followed a parameter would change the vertex
+    count with it.  So it is derived once, here, from the loop the
+    geometry gives: the nearest whole number of nominal pitches around
+    it.  A belt is bought by tooth count and tensioned to fit, which is
+    the same arithmetic run the other way.
+    """
+    return round(length(circles) / PITCH)
+
+
+def pitch(circles):
+    """The pitch the teeth of the loop through `circles` are drawn at.
+
+    Not quite `PITCH`.  molejo divides the loop by the declared tooth
+    count rather than stepping a nominal pitch around it, because a
+    whole number of teeth is what closes the pattern at the seam and
+    what keeps a moving idler changing the pitch rather than the count.
+    A real belt does the same thing with its own tension.
+    """
+    return length(circles) / tooth_count(circles)
+
+
+def teeth(circles, face='inner'):
+    """The tooth pattern of a GT2 belt run around `circles`."""
+    return Teeth(pitch=PITCH, height=TOOTH_HEIGHT, flank='trapezoid',
+                 count=tooth_count(circles), face=face)
+
+
+def length(circles):
+    """The pitch length of the loop through `circles`.
+
+    What a catalogue calls the belt's length, and what molejo divides by
+    the tooth count to get the pitch it actually draws at.
+    """
+    return _metrics(circles)['length']
+
+
+def span_origin(circles, span):
+    """Where tangent span `span` of the loop begins, in the wrap's plane.
+
+    The wrap's arc-length origin is where the belt leaves the first
+    circle, and an anchor is measured from the start of the span it
+    names, so this is the point a clamp's position is measured from.
+    """
+    return spans(circles)[span][0]
+
+
+def span_scale(circles, span):
+    """Millimetres of belt per millimetre of travel along tangent span
+    `span`, for a carriage running along the wrap plane's x.
+
+    An anchor is a distance along the span; a carriage is at a position
+    along the machine's axis.  The two differ by the span's tilt, which
+    is nought only when the two circles the span joins have the same
+    radius -- as the Y belt's three do, and the X belt's pulley and
+    idler do not.  On the X belt it comes to two parts in a million,
+    well under a micron across the travel, so this is a correctness
+    matter rather than a visible one.  It is written down because the
+    conversion is real, not because the number is large.
+    """
+    return 1.0 / spans(circles)[span][1][0]
+
+
+def spans(circles):
+    """The loop's tangent spans, each as (start, direction, length).
+
+    molejo's rule, restated: for consecutive circles at distance *L*
+    with radii *r* and *r'*, each signed by which way the belt turns
+    about it, the normal both are touched along is
+    ``n = d*u + sqrt(1 - d*d)*rot90(u)`` for ``d = (r - r')/L`` and ``u``
+    the unit vector between the centres, and the belt runs from one
+    tangent point to the next in the direction ``(n_y, -n_x)``.  Where
+    the two senses agree that is the external tangent; where they differ
+    it is the internal one, which crosses between the centres.
+    """
+    return list(_metrics(circles)['spans'])
+
+
+def stations(circles):
+    """Where each of the loop's 2k elements begins, in belt.
+
+    Span 0, the arc about circle 1, span 1, ... and finally the arc
+    about circle 0, which is molejo's own ordering: the loop's origin is
+    where the belt leaves the first circle.  An anchor is measured from
+    the start of a span and a pulley's phase from the start of its own
+    arc, so converting between the two needs to know where both of them
+    begin.
+    """
+    return list(_metrics(circles)['stations'])
+
+
+def _sense(circle):
+    """Which way the belt turns about `circle`: ``-1`` where the loop is
+    concave, because the belt is bent backwards over it."""
+    return -1.0 if circle.get('turn') == 'counterclockwise' else 1.0
+
+
+def _arcs(circles):
+    """How much belt is wrapped around each circle, in order.
+
+    The project's order places each arc after the span that reaches it,
+    while mechanics reports arcs by the circle they wrap.  Rotate that
+    circle-indexed result once so span 0 is still followed by circle 1.
+    """
+    circle_arcs = _metrics(circles)['arc_lengths']
+    return list(circle_arcs[1:] + circle_arcs[:1])
+
+
+def _metrics(circles):
+    """Mechanics metrics adapted from project circle dictionaries."""
+    return belt_path_metrics(
+        [circle['center'] for circle in circles],
+        [circle['radius'] for circle in circles],
+        [_sense(circle) for circle in circles])
+
+
+class Belt(MolejoNode):
+    """A GT2 belt of this machine, as a flexible leaf.
+
+    Shares with `ScadPart` the thing every part in this package shares
+    -- its dimensions are read from the .scad sources, which no Python
+    import mentions, so an edit there has to invalidate it -- but not
+    its geometry, which is molejo's rather than an OpenSCAD module's.
+
+    A subclass declares one port per shape parameter and returns the
+    shape; the axis that owns it connects the port.  Both belts here
+    have exactly one parameter, the clamp their ends are held by.
+    """
+
+    color = materials.RUBBER
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.files = self.files | scad_sources()

@@ -40,7 +40,7 @@ pair used by `BEAM_PER_DEGREE` and `BED_PER_DEGREE`.
 All commands ran from this repository with the workspace virtual environment
 and `PYTHONPATH="$PWD:/home/asa/devel/machinome-studio/WTs/mechanics-rolling-angle"`.
 
-`SOLID_BUILD_DIR=_build/rolling-angle machinome test metamaquina2/metamaquina2.py --exact`
+`SOLID_BUILD_DIR=_build/rolling-angle machinome test simulation/metamaquina2.py --exact`
 ran 67 tests in 172.70 seconds: 67 passed, 0 failed.  This includes both
 axis motion, belt-tooth travel, pulley mesh, and one-groove-per-tooth checks,
 so it covers the retained signs/projections and the complementary arc ratios.
@@ -50,7 +50,7 @@ the scene but the renderer returned an empty failure after an existing
 `jhead.scad` line-107 parser diagnostic.  The fallback web-renderer capture
 used the same pose and independent `_build/rolling-angle-snapshot` directory:
 
-`machinome snapshot metamaquina2/metamaquina2.py -o _build/rolling-angle-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
+`machinome snapshot simulation/metamaquina2.py -o _build/rolling-angle-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
 
 Visual inspection found the carriage displaced toward +X and the bed toward
 -Y as commanded; the frame, raised X beam, hot end, and filament run remained

@@ -40,7 +40,7 @@ is drawn and bought and never modelled.
   holder, the PTFE liner inside it, the brass nozzle screwed into its foot,
   and the heater resistor and thermistor in the holes the nozzle is drilled
   for. The extruder gains the two M3x30 the design cuts holes for.
-- `metamaquina2/jhead.py` holds what a J-head is here, the way `gt2.py`
+- `simulation/jhead.py` holds what a J-head is here, the way `gt2.py`
   holds what a belt is: the two shop drawings' own numbers, and the stack
   arithmetic that turns them into where each part stands.
 - **The holder's length is derived, not written down.** Its drawing is the
@@ -117,17 +117,17 @@ Not in this change, and deliberately:
 
 ## Impact
 
-- `metamaquina2/jhead.py` — new: what a J-head is here, and the stack
+- `simulation/jhead.py` — new: what a J-head is here, and the stack
   arithmetic.
-- `metamaquina2/x_stage/carriage/extruder/hotend/` — new: `hot_end.py`,
+- `simulation/x_stage/carriage/extruder/hotend/` — new: `hot_end.py`,
   `nozzle_holder.py`, `liner.py`, `nozzle.py`, `heater_resistor.py`,
   `thermistor.py`.
-- `metamaquina2/x_stage/carriage/extruder/extruder.py` — the hot end, and
+- `simulation/x_stage/carriage/extruder/extruder.py` — the hot end, and
   the two M3x30 that hold it.
-- `metamaquina2/x_stage/carriage/x_carriage.py` — the docstring that
+- `simulation/x_stage/carriage/x_carriage.py` — the docstring that
   explained why there was no hot end.
-- `metamaquina2/scad.py` — `nozzle.scad`.
-- `metamaquina2/params.py` — three probed names, three module-body blocks.
-- `metamaquina2/materials.py` — PTFE and ceramic.
-- `metamaquina2/metamaquina2.py` — the module docstring.
-- `metamaquina2/test_metamaquina2.py` — the contracts below.
+- `simulation/scad.py` — `nozzle.scad`.
+- `simulation/params.py` — three probed names, three module-body blocks.
+- `simulation/materials.py` — PTFE and ceramic.
+- `simulation/metamaquina2.py` — the module docstring.
+- `simulation/test_metamaquina2.py` — the contracts below.

@@ -38,7 +38,7 @@ not of these two adjustments, and the Z-link has open questions of its own.
 
 - A compression spring becomes a leaf kind this project knows: a molejo
   helix swept from a round wire section, with one port carrying the length
-  it is installed at. `metamaquina2/spring.py` holds what a compression
+  it is installed at. `simulation/spring.py` holds what a compression
   spring *is* here, the way `gt2.py` holds what a belt is.
 - The wire diameter and the coil count are **derived, not written down**.
   The bill of materials names only an outside diameter and a free length, so
@@ -99,19 +99,19 @@ Not in this change, and deliberately:
 
 ## Impact
 
-- `metamaquina2/spring.py` — new: the compression spring as a molejo leaf.
-- `metamaquina2/y_axis/platform/bed_spring.py`,
-  `metamaquina2/y_axis/platform/level_screw.py` — new.
-- `metamaquina2/y_axis/platform/y_platform.py` — four levelling screws at the
+- `simulation/spring.py` — new: the compression spring as a molejo leaf.
+- `simulation/y_axis/platform/bed_spring.py`,
+  `simulation/y_axis/platform/level_screw.py` — new.
+- `simulation/y_axis/platform/y_platform.py` — four levelling screws at the
   bed's own corner holes.
-- `metamaquina2/x_stage/carriage/extruder/idler_spring.py` — new.
-- `metamaquina2/x_stage/carriage/extruder/handle.py` — springs, washers, the
+- `simulation/x_stage/carriage/extruder/idler_spring.py` — new.
+- `simulation/x_stage/carriage/extruder/handle.py` — springs, washers, the
   named placement, the port wiring.
-- `metamaquina2/x_stage/carriage/extruder/extruder.py` — reads that placement.
-- `metamaquina2/x_stage/carriage/extruder/idler/idler.py` — publishes the back
+- `simulation/x_stage/carriage/extruder/extruder.py` — reads that placement.
+- `simulation/x_stage/carriage/extruder/idler/idler.py` — publishes the back
   plate's outer face.
-- `metamaquina2/params.py` — five more probed names, one more module-body
+- `simulation/params.py` — five more probed names, one more module-body
   value.
-- `metamaquina2/metamaquina2.py` — the module docstring, which is this
+- `simulation/metamaquina2.py` — the module docstring, which is this
   package's own account of what it reads.
-- `metamaquina2/test_metamaquina2.py` — the contracts below.
+- `simulation/test_metamaquina2.py` — the contracts below.

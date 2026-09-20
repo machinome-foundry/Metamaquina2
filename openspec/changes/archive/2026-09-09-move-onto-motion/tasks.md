@@ -29,12 +29,12 @@ report the assertion and why.
       `x_stage/ends/motor/x_end_motor.py`,
       `x_stage/ends/motor/belt_side.py`, `y_axis/motor/y_motor.py`
       (`AssemblyNode` stays, `RotationalPort` moves).
-      `metamaquina2/test_metamaquina2.py` imports no moved name and is
+      `simulation/test_metamaquina2.py` imports no moved name and is
       NOT touched.
 - [x] 1.2 Confirmed: before 1.1 the import failed at `filament.py:105`
       with `ImportError: module 'solid_node.node' has no attribute
       'TranslationalPort'`; after 1.1,
-      `PYTHONPATH=. .venv/bin/python -c "import metamaquina2.metamaquina2"`
+      `PYTHONPATH=. .venv/bin/python -c "import simulation.metamaquina2"`
       succeeds.
 - [x] 1.3 **Baseline: 67/67 passed, 0 failed** (faceted kernel, volume
       epsilon 0 mm³), 246.36 s. Every one of the 67 tests in
@@ -68,7 +68,7 @@ report the assertion and why.
 ## 2. Stage B — the motion refactor
 
 Do these in order; each step leaves the model importable, so run
-`python -c "import metamaquina2.metamaquina2"` after each.
+`python -c "import simulation.metamaquina2"` after each.
 
 - [x] 2.1 **The three belt constants per axis.** In
       `x_stage/x_belt.py`, after `pulley_angle()`, add `PITCH_ARC`,
@@ -121,7 +121,7 @@ Do these in order; each step leaves the model importable, so run
       1e-13 degrees (proposal, Tests item 2). Report the number, do not
       round it away.
 - [x] 3.2 Run the whole suite again,
-      `PYTHONPATH=. .venv/bin/solid test --faceted metamaquina2/metamaquina2.py`,
+      `PYTHONPATH=. .venv/bin/solid test --faceted simulation/metamaquina2.py`,
       and record every contract's result beside its stage A result. The
       same tests green as the baseline, none newly red.
 - [x] 3.3 Commit as

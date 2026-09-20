@@ -46,7 +46,7 @@ already there rather than a new number.
 
 **1. `XStage.lift` — the whole beam climbs the Z screws.**
 
-    # metamaquina2/x_stage/x_stage.py
+    # simulation/x_stage/x_stage.py
     lift = Prismatic(axis=(0, 0, 1), unit='mm')
 
 Today `Metamaquina2.simulate()` writes
@@ -83,7 +83,7 @@ so the number is written once and both readings come off it.
 
 **2. `XCarriage.travel` — the carriage slides along the beam.**
 
-    # metamaquina2/x_stage/carriage/x_carriage.py
+    # simulation/x_stage/carriage/x_carriage.py
     travel = Prismatic(axis=(1, 0, 0), unit='mm')
 
 Today `XStage.simulate()` writes `self.carriage.translate(
@@ -96,7 +96,7 @@ from there. Naming the displacement keeps `render()` untouched.
 
 **3. `YPlatform.slide` — the bed slides along the Y rods.**
 
-    # metamaquina2/y_axis/platform/y_platform.py
+    # simulation/y_axis/platform/y_platform.py
     slide = Prismatic(axis=(0, 1, 0), unit='mm')
 
 Today `YAxis.simulate()` writes `self.platform.translate([0, placed, 0])`
@@ -106,7 +106,7 @@ where `render()` draws it.
 
 **4. `XPulley.spin` — the X motor pulley turns.**
 
-    # metamaquina2/x_stage/ends/motor/belt_side.py, beside PULLEY_DEPTH
+    # simulation/x_stage/ends/motor/belt_side.py, beside PULLEY_DEPTH
     class XPulley(GT2Pulley):
         """The pulley on the X motor shaft: a GT2Pulley that turns on
         the shaft the belt side bolts its motor to."""
@@ -130,7 +130,7 @@ is the only place that cares.
 
 **5. `YPulley.spin` — the Y motor pulley turns.**
 
-    # metamaquina2/y_axis/motor/y_motor.py, beside the imports
+    # simulation/y_axis/motor/y_motor.py, beside the imports
     class YPulley(GT2Pulley):
         """The pulley on the Y motor shaft, standing in the belt's own
         plane rather than the motor's."""
@@ -263,7 +263,7 @@ carriage position has to be told:
 derived from numbers already in the module and both named for what they
 are:
 
-    # metamaquina2/x_stage/x_belt.py, after pulley_angle()
+    # simulation/x_stage/x_belt.py, after pulley_angle()
 
     #: Millimetres of belt per degree of pulley: the pitch arc.
     PITCH_ARC = math.pi * (PULLEY_RADIUS + gt2.PITCH_LINE) / 180
@@ -405,7 +405,7 @@ check against the machine.
   change proposes no spec delta**: the specs describe what the machine
   does and what fits what, not how the package states it, and every
   requirement in them holds word for word afterwards.
-* `metamaquina2/test_metamaquina2.py` — see Tests.
+* `simulation/test_metamaquina2.py` — see Tests.
 
 ## Known gaps
 
@@ -497,7 +497,7 @@ implementer should confirm it and go straight to stage A. Do not touch
 
 ## Tests
 
-One test module, `metamaquina2/test_metamaquina2.py`, one class
+One test module, `simulation/test_metamaquina2.py`, one class
 `Metamaquina2Test`, **67 tests**, all against the one declared model
 (`pyproject.toml` names `metamaquina2.metamaquina2:Metamaquina2`; there
 are no plain `pytest` tests and no second root). It imports no name that

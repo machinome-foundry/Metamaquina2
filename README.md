@@ -38,7 +38,7 @@ The machine as a node tree
 ==========================
 
 Beside the OpenSCAD design there is a second reading of it: a
-machinome tree in `metamaquina2/`, in which every part a builder
+machinome tree in `simulation/`, in which every part a builder
 handles is a leaf and every group that gets put together before it goes
 into something bigger is an assembly. The geometry is still the .scad
 design's -- the nodes call its modules and read its dimensions -- and
@@ -61,15 +61,15 @@ about its own axis and still stand where it is held. What is left in
 of filament is dragged into, which is molejo geometry rather than a
 rigid part's pose.
 
-    machinome test metamaquina2/metamaquina2.py     # the contracts
-    machinome build metamaquina2/metamaquina2.py    # build the machine
-    machinome develop metamaquina2/metamaquina2.py  # watch and serve it
+    machinome test simulation/metamaquina2.py     # the contracts
+    machinome build simulation/metamaquina2.py    # build the machine
+    machinome develop simulation/metamaquina2.py  # watch and serve it
 
 Each node declares its parameters, so the two the machine itself
 declares can be set from the shell on any of those commands:
 
-    machinome build metamaquina2/metamaquina2.py --set spool_holder_offset=500
-    machinome build metamaquina2/metamaquina2.py --set power_supply_fitted=false
+    machinome build simulation/metamaquina2.py --set spool_holder_offset=500
+    machinome build simulation/metamaquina2.py --set power_supply_fitted=false
 
 `spool_holder_offset` is how far beside the machine the filament stand
 sits, along the machine's own x -- the one placement here that this
@@ -85,7 +85,7 @@ the supply, its box and its bolts are left out -- a different mass and
 a shorter bill of materials, not a hole in the render.
 
 Everything else the machine is dimensioned by comes from the OpenSCAD
-sources themselves, evaluated once at import (`metamaquina2/params.py`),
+sources themselves, evaluated once at import (`simulation/params.py`),
 and is deliberately *not* a settable parameter: the parts are drawn by
 the .scad modules from those same variables, so a value overridden in
 Python would move where a part is put without changing the part, and

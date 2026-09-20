@@ -1,5 +1,5 @@
 [tool.machinome]
-model = "metamaquina2.metamaquina2:Metamaquina2"
+model = "simulation.metamaquina2:Metamaquina2"
 
 [tool.machinome-studio]
 profile = "fordesmac"

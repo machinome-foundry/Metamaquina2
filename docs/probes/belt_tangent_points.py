@@ -10,9 +10,9 @@ import math
 from machinome_mechanics import belt_tangent_points
 from solid2 import get_animation_time
 
-from metamaquina2 import gt2
-from metamaquina2.x_stage import x_belt
-from metamaquina2.y_axis import y_belt
+from simulation import gt2
+from simulation.x_stage import x_belt
+from simulation.y_axis import y_belt
 
 
 def legacy_normal(here, there):

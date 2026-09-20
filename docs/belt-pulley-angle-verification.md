@@ -55,7 +55,7 @@ the Y contact-station subtraction.
 
 ```sh
 SOLID_BUILD_DIR=_build/belt-pulley-angle \
-machinome test metamaquina2/metamaquina2.py --exact
+machinome test simulation/metamaquina2.py --exact
 ```
 
 Passed **67/67** in **358.46 seconds**. This includes the X/Y driven-belt
@@ -66,7 +66,7 @@ fail any contract and are unrelated to these Python laws.
 
 ```sh
 SOLID_BUILD_DIR=_build/belt-pulley-angle \
-machinome build metamaquina2/metamaquina2.py
+machinome build simulation/metamaquina2.py
 ```
 
 Passed in 17.65 seconds with the exact-suite cache warm.
@@ -75,7 +75,7 @@ Passed in 17.65 seconds with the exact-suite cache warm.
 
 ```sh
 SOLID_BUILD_DIR=_build/belt-pulley-angle \
-machinome snapshot metamaquina2/metamaquina2.py \
+machinome snapshot simulation/metamaquina2.py \
   -o _build/belt-pulley-angle-driven-web.png --renderer web \
   --autocenter --viewall --imgsize 1280x720 \
   --drive x=90 --drive y=-80 --drive z=140

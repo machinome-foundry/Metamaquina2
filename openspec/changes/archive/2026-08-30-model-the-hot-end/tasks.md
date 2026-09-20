@@ -8,7 +8,7 @@
 
 ## 2. What a J-head is
 
-- [x] 2.1 Write `metamaquina2/jhead.py`: the two shop drawings' own numbers for the holder and for the nozzle, each named for the drawing it comes off
+- [x] 2.1 Write `simulation/jhead.py`: the two shop drawings' own numbers for the holder and for the nozzle, each named for the drawing it comes off
 - [x] 2.2 Derive the holder's body length from `jhead_length`, `jhead_instalation_depth`, the holder's own shoulder and the nozzle's own reach below its block, and record there why the length is the free number and the others are not
 - [x] 2.3 Derive the filament bore from the ⌀10.4 groove root and the drawing's minimum groove wall, and record that only the thin end of the drawing's wall range leaves a bore the design's own liner passes down
 - [x] 2.4 Derive where the nozzle's threaded stub tops out, which is what the liner is drawn to

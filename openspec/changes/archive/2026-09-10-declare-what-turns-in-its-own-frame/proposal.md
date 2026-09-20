@@ -34,11 +34,11 @@ hand-written rotation left in `simulate()`.
 
 **Own-frame restatement (ADR-097), two sites:**
 
-- `YPulley.spin` (`metamaquina2/y_axis/motor/y_motor.py`): axis carried
+- `YPulley.spin` (`simulation/y_axis/motor/y_motor.py`): axis carried
   from the parent-frame `(-1, 0, 0)` to the own-frame `(0, 0, 1)`;
   anchor `at=(0.0, SHAFT[0], SHAFT[1])` dropped (its only nonzero
   component lay along the new axis, hence inert under either reading).
-- `XPulley.spin` (`metamaquina2/x_stage/ends/motor/belt_side.py`): axis
+- `XPulley.spin` (`simulation/x_stage/ends/motor/belt_side.py`): axis
   unchanged, `(0, 0, 1)`, because the parent places this body by a pure
   translation; anchor `at=(XEnd_box_size / 2, XMotor_height, 0.0)`
   dropped (its across-axis components exactly restated the parent's own
@@ -79,17 +79,17 @@ exists to let a project state.
 
 No pose moves: `Metamaquina2.z.drives(z_axis.bars.angle, ...)` and
 `.drives(z_axis.couplings.angle, ...)` (the external wiring in
-`metamaquina2/metamaquina2.py:359-360`) are untouched, and every
+`simulation/metamaquina2.py:359-360`) are untouched, and every
 internal wiring change here reproduces exactly what the deleted
 `simulate()` methods did by hand.
 
 ## Impact
 
-- Affected files: `metamaquina2/y_axis/motor/y_motor.py`,
-  `metamaquina2/x_stage/ends/motor/belt_side.py`,
-  `metamaquina2/hardware/threaded_rod.py`,
-  `metamaquina2/hardware/shaft_coupling.py`,
-  `metamaquina2/z_axis/z_bars.py`, `metamaquina2/z_axis/z_couplings.py`.
+- Affected files: `simulation/y_axis/motor/y_motor.py`,
+  `simulation/x_stage/ends/motor/belt_side.py`,
+  `simulation/hardware/threaded_rod.py`,
+  `simulation/hardware/shaft_coupling.py`,
+  `simulation/z_axis/z_bars.py`, `simulation/z_axis/z_couplings.py`.
 - No test is edited. No spec delta: `openspec/specs/machine-motion/spec.md`
   describes driver behaviour, and every pose is proven unchanged
   (§ tasks.md, 0.000e+00 max deviation over 11 poses / 452 leaves).

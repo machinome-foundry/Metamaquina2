@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Luis Henrique Cassis Fagundes
+# Upstream Metamaquina design retains its own notices and grants; see NOTICE.
+# End Foundry notice
+"""A hex-head bolt, in whichever diameter and length is called for."""
+
+from machinome.parameters import Length
+
+from simulation import materials
+from simulation.part import ScadPart
+from simulation.scad import bolts
+
+
+class Bolt(ScadPart):
+    """One bolt: head on the XY plane, shank running down -Z.
+
+    The design has an `M3x30`-style module per size, all of them
+    forwarding to one `bolt(dia, length)`.  Here the size is declared
+    instead, so every size reaches the artifact key and no two sizes
+    can share a build.
+
+    Neither has a default: a bolt with no size is not a part, and the
+    thing that puts one in a hole is the thing that knows how long it
+    has to be.
+    """
+
+    color = materials.METAL
+
+    diameter = Length(min=0)
+    length = Length(min=0)
+
+    def render(self):
+        return bolts.bolt(self.diameter, self.length)
