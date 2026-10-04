@@ -1,0 +1,29 @@
+/* Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-or-later. */
+.portrait-page { position:absolute; inset:0; background:var(--vm-background); color:var(--vm-foreground); }
+.portrait-machine { left:33%; top:6%; width:65%; height:84%; }
+.portrait-copy { left:5%; top:13%; width:29%; height:70%; z-index:2; }
+.portrait-note { left:5%; top:93%; width:90%; height:3%; z-index:3; }
+.panel { padding-top:1.2vw; }
+.eyebrow { font-size:1.05vw; font-weight:700; letter-spacing:.17em; color:var(--vm-accent); text-transform:uppercase; line-height:1.65; }
+.panel h1 { font-size:3.55vw; line-height:1.09; letter-spacing:-.055em; font-weight:750; margin:1.35vw 0 1.5vw; white-space:pre-line; overflow-wrap:normal; }
+.panel-question h1 { font-size:2.9vw; letter-spacing:-.042em; }
+.panel-license h1 { font-size:3.2vw; }
+.accent-rule { height:.25vw; width:3.8vw; background:var(--vm-accent); margin-bottom:1.7vw; }
+.deck { font-size:1.45vw; line-height:1.48; margin:0 0 1.3vw; color:#464641; white-space:pre-line; }
+.facts { padding-top:.25vw; }
+.fact { display:flex; gap:.7vw; font-size:1.12vw; line-height:1.5; padding:.43vw 0; color:#55554f; }
+.fact-dot { background:var(--vm-accent); width:.28vw; height:.28vw; flex:0 0 .28vw; margin-top:.61vw; }
+.footnote { display:flex; justify-content:space-between; font-size:.76vw; text-transform:uppercase; letter-spacing:.13em; color:#72716b; }
+.credit-page { position:absolute; inset:0; background:#171a19; color:#f5f2e9; }
+.credit-slot { inset:0; }
+.credits header { position:absolute; left:8%; top:5%; height:11%; }
+.credits header span { color:#e89056; font-size:.9vw; letter-spacing:.19em; }
+.credits header h1 { font-size:2.6vw; line-height:1; margin:.65vw 0 0; letter-spacing:-.025em; }
+.roll-window { position:absolute; left:8%; top:21%; width:84%; height:65%; overflow:hidden;
+  mask-image:linear-gradient(to bottom,transparent,#000 5%,#000 90%,transparent); }
+.roll-content { position:absolute; top:0; left:0; width:100%; }
+.credit-group { box-sizing:border-box; padding-top:1.1vh; }
+.credit-group h2 { color:#e89056; font-size:.85vw; font-weight:600; text-transform:uppercase; letter-spacing:.15em; margin:0 0 .5vh; }
+.credit-names { font-size:1.42vw; line-height:1.35; margin-bottom:.4vh; }
+.credit-line { font-size:1.03vw; line-height:1.6; color:#c9d1cc; white-space:pre-line; }
+.credits footer { position:absolute; left:8%; bottom:5%; font-size:.9vw; letter-spacing:.035em; color:#b8c0bb; }
