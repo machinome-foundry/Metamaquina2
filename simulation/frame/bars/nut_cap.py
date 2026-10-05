@@ -4,7 +4,7 @@
 # End Foundry notice
 """The pair of nuts that clamp a threaded bar through a side panel."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.m8_domed_cap_nut import M8DomedCapNut
 from simulation.hardware.m8_nut import M8Nut

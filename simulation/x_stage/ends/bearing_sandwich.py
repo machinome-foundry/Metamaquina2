@@ -4,7 +4,7 @@
 # End Foundry notice
 """The bearing sandwich of an X end: a plate and the spacers behind it."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.double_m3_spacer import DoubleM3Spacer
 from simulation.params import bearing_sandwich_spacing, thickness

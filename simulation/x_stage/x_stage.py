@@ -5,7 +5,7 @@
 """The X stage: the whole beam the Z axis lifts."""
 
 from machinome.motion.joints import Prismatic
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.params import (
     XCarPosition,

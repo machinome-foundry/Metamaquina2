@@ -4,7 +4,7 @@
 # End Foundry notice
 """The pair of smooth rods the Y platform slides on."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.smooth_rod import SmoothRod
 from simulation.params import Y_rod_height, Y_rod_length, Y_rods_distance

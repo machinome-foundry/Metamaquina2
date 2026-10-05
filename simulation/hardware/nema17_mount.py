@@ -4,7 +4,7 @@
 # End Foundry notice
 """A NEMA 17 bolted to a sheet: the motor and its four bolts."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.bolt import Bolt
 from simulation.hardware.m3_washer import M3Washer

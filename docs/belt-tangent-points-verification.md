@@ -48,7 +48,7 @@ plain SymPy was not used as a substitute for that nonlinear expression face.
 
 With the workspace virtual environment, the same `PYTHONPATH`, and isolated
 `SOLID_BUILD_DIR=_build/belt-tangent-points`,
-`machinome test simulation/metamaquina2.py --exact` ran 67 tests in
+`machinome test simulation/metamaquina2.py --brep` ran 67 tests in
 462.66 seconds: 67 passed, 0 failed.  Relevant passing contracts include both
 closed flexible loops, X and Y belt redraw/travel, idler routing, pulley mesh,
 and one groove per belt tooth.  The build repeated the existing `jhead.scad`

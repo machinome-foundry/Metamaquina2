@@ -5,7 +5,7 @@
 """A length of M8 threaded bar."""
 
 from machinome.motion.joints import Revolute
-from machinome.node import Build123dNode
+from machinome.node.build123d import Build123dNode
 from machinome.parameters import Length
 
 from simulation import materials, thread

@@ -4,7 +4,7 @@
 # End Foundry notice
 """A Z endstop: two acrylic spacers and a switch."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.electronics.endstops.acrylic_spacer import ZEndstopSpacer
 from simulation.electronics.endstops.microswitch import Microswitch

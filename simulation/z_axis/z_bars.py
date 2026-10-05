@@ -5,7 +5,7 @@
 """The two vertical threaded bars that lift the X stage."""
 
 from machinome.motion.ports import RotationalPort
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.threaded_rod import SpinningThreadedRod
 from simulation.params import (

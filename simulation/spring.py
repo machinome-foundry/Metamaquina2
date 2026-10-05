@@ -50,7 +50,7 @@ wire standing proud at each end, which is what `rise` is about.
 
 from molejo import Circle, Helix, P, Shape
 from machinome.motion.ports import TranslationalPort
-from machinome.node import MolejoNode
+from machinome.node.molejo import MolejoNode
 from machinome.parameters import Length
 
 from simulation import materials

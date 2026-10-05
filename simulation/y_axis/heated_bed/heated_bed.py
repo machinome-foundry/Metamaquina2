@@ -4,7 +4,7 @@
 # End Foundry notice
 """The heated build platform: board plus glass."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.params import (
     glass_h,

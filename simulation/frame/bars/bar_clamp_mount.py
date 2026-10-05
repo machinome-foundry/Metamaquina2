@@ -4,7 +4,7 @@
 # End Foundry notice
 """A printed bar clamp and the nuts that hold it on the bar."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.frame.bars.barclamp import BarClamp
 from simulation.hardware.m8_nut import M8Nut

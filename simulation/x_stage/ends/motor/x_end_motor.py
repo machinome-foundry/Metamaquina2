@@ -4,7 +4,7 @@
 # End Foundry notice
 """The motor-side X end."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.frame.tslot_bolt import TSlotBolt
 from simulation.hardware.lm8uu import LM8UU

@@ -4,7 +4,7 @@
 # End Foundry notice
 """The four horizontal threaded bars that hold the frame square."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.frame.bars.front_bars import FrontBars
 from simulation.frame.bars.rear_bars import RearBars

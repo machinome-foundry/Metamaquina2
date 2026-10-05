@@ -4,7 +4,7 @@
 # End Foundry notice
 """Every cable clip in the machine, on the panel it sticks to."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation import frames
 from simulation.electronics.cable_clip import CableClip

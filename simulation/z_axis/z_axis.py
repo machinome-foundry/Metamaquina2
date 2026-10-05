@@ -4,7 +4,7 @@
 # End Foundry notice
 """The Z axis."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.z_axis.z_bars import ZBars
 from simulation.z_axis.z_couplings import ZCouplings

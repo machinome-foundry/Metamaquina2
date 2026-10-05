@@ -5,7 +5,7 @@
 """The X carriage."""
 
 from machinome.motion.joints import Prismatic
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.double_m3_spacer import DoubleM3Spacer
 from simulation.hardware.lm8uu import LM8UU

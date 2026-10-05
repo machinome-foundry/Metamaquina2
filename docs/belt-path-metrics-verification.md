@@ -51,7 +51,7 @@ All project commands used the workspace virtual environment,
 and isolated `SOLID_BUILD_DIR=_build/belt-path-metrics`.
 
 Before the seam correction, `machinome test simulation/metamaquina2.py
---exact` ran 67 tests in 421.84 seconds: 67 passed, 0 failed.  After the
+--brep` ran 67 tests in 421.84 seconds: 67 passed, 0 failed.  After the
 correction, the same command reran against the final helper source and ran 67
 tests in 203.04 seconds: 67 passed, 0 failed.  Relevant contracts include both
 closed flexible loops, X and Y belt redraw/travel, idler routing, pulley mesh,

@@ -4,7 +4,7 @@
 # End Foundry notice
 """The extruder body: five slices stacked."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.params import thickness
 from simulation.x_stage.carriage.extruder.slice import ExtruderSlice

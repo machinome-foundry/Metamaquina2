@@ -4,7 +4,7 @@
 # End Foundry notice
 """The idler release handle, its bolts, and the springs on them."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.bolt import Bolt
 from simulation.hardware.m4_washer import M4Washer

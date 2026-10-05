@@ -4,7 +4,7 @@
 # End Foundry notice
 """The bolt, washer and nut that close one t-slot joint."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 from machinome.parameters import Flag, Length
 
 from simulation.hardware.bolt import Bolt

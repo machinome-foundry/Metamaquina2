@@ -40,7 +40,7 @@ pair used by `BEAM_PER_DEGREE` and `BED_PER_DEGREE`.
 All commands ran from this repository with the workspace virtual environment
 and `PYTHONPATH="$PWD:/home/asa/devel/machinome-studio/WTs/mechanics-rolling-angle"`.
 
-`SOLID_BUILD_DIR=_build/rolling-angle machinome test simulation/metamaquina2.py --exact`
+`SOLID_BUILD_DIR=_build/rolling-angle machinome test simulation/metamaquina2.py --brep`
 ran 67 tests in 172.70 seconds: 67 passed, 0 failed.  This includes both
 axis motion, belt-tooth travel, pulley mesh, and one-groove-per-tooth checks,
 so it covers the retained signs/projections and the complementary arc ratios.

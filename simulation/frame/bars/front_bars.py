@@ -4,7 +4,7 @@
 # End Foundry notice
 """The two threaded bars across the front of the machine."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.frame.bars.bar_clamp_mount import BarClampMount
 from simulation.frame.bars.belt_idler import BeltIdler

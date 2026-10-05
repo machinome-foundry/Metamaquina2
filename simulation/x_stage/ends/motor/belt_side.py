@@ -7,7 +7,7 @@ pulley."""
 
 from machinome.motion.joints import Revolute
 from machinome.motion.ports import RotationalPort
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.gt2_pulley import WIDTH, GT2Pulley
 from simulation.hardware.nema17_mount import Nema17Mount

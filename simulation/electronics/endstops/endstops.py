@@ -4,7 +4,7 @@
 # End Foundry notice
 """All four endstops, on the panels they mount to."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation import frames
 from simulation.electronics.endstops.y_endstop import YEndstop

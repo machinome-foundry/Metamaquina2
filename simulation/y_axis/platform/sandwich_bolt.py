@@ -4,7 +4,7 @@
 # End Foundry notice
 """The washer and bolt that pull a bearing sandwich together."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 from machinome.parameters import Length
 
 from simulation.hardware.bolt import Bolt

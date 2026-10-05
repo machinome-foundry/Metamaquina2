@@ -4,7 +4,7 @@
 # End Foundry notice
 """A 608 bearing running as an idler on a horizontal frame bar."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 from machinome.parameters import Flag
 
 from simulation.hardware.bearing_608zz import Bearing608zz

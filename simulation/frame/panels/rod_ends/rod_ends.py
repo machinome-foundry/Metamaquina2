@@ -4,7 +4,7 @@
 # End Foundry notice
 """The six plates that cap the Z rods and Z bars."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.frame.panels.rod_ends.rod_end_bottom import RodEndBottom
 from simulation.frame.panels.rod_ends.rod_end_top import RodEndTop

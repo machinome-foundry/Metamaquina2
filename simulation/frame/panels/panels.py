@@ -4,7 +4,7 @@
 # End Foundry notice
 """Every lasercut panel of the frame, standing where it belongs."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation import frames
 from simulation.frame.panels.arc_panel import ArcPanel

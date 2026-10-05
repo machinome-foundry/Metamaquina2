@@ -4,7 +4,7 @@
 # End Foundry notice
 """The extruder idler arm."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.bearing_608zz import Bearing608zz
 from simulation.params import (

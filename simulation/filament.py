@@ -107,7 +107,7 @@ ask for all four.
 
 from molejo import Circle, Helix, P, Shape, Spline
 from machinome.motion.ports import TranslationalPort
-from machinome.node import MolejoNode
+from machinome.node.molejo import MolejoNode
 
 from simulation import materials
 from simulation.params import (

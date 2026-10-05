@@ -4,7 +4,7 @@
 # End Foundry notice
 """The frame: panels, the bolts that join them, and the bars."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.frame.bars.bars import Bars
 from simulation.frame.joints import PanelJoints

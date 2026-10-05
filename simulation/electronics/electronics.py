@@ -4,7 +4,7 @@
 # End Foundry notice
 """The electronics: controller, power supply, endstops and cable clips."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 from machinome.parameters import Flag
 
 from simulation import frames

@@ -55,7 +55,7 @@ the Y contact-station subtraction.
 
 ```sh
 SOLID_BUILD_DIR=_build/belt-pulley-angle \
-machinome test simulation/metamaquina2.py --exact
+machinome test simulation/metamaquina2.py --brep
 ```
 
 Passed **67/67** in **358.46 seconds**. This includes the X/Y driven-belt

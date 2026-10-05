@@ -5,7 +5,7 @@
 """The couplings that join each Z motor shaft to its threaded bar."""
 
 from machinome.motion.ports import RotationalPort
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.hardware.shaft_coupling import ShaftCoupling
 from simulation.params import (

@@ -186,7 +186,7 @@ import math
 
 import numpy
 from molejo import Polygon, Teeth
-from machinome.node import MolejoNode
+from machinome.node.molejo import MolejoNode
 from machinome_mechanics import (
     belt_path_metrics, pulley_pitch_radius)
 

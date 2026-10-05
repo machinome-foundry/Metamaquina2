@@ -4,7 +4,7 @@
 # End Foundry notice
 """The idler the X belt turns around."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 from machinome.parameters import Length
 
 from simulation.hardware.bearing_608zz import Bearing608zz

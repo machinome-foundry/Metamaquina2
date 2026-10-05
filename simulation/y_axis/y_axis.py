@@ -4,7 +4,7 @@
 # End Foundry notice
 """The Y axis."""
 
-from machinome.node import AssemblyNode
+from machinome.node.assembly import AssemblyNode
 
 from simulation.params import (
     base_bars_Zdistance,
