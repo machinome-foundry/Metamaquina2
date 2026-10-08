@@ -7,8 +7,8 @@ Rely on those declared grants, preserving the credits to inherited material.
 
 Copyright (C) 2026 Luis Henrique Cassis Fagundes for original contributions.
 In the model package (originally metamaquina2/, now simulation/):
-- __init__.py files, scad.py, params.py, part.py, materials.py, gt2.py and
-  test_*.py are original loader/probe/base/helper/test software licensed
+- __init__.py files, scad.py, params.py, part.py, materials.py, gt2.py,
+  test_*.py and tools/ are original loader/probe/base/helper/test software licensed
   AGPL-3.0-or-later. Upstream source loaded by them retains its own license.
 - Other Python files integrate or adapt the upstream machine's design,
   geometry, placement and assembly. They retain GPL-3.0-only for that
