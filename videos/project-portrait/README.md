@@ -61,11 +61,11 @@ node videos/project-portrait/speech.mjs "$portrait_workspace/videomaker"
 The following commands cannot purchase speech:
 
 ```sh
-node "$portrait_workspace/videomaker/bin/videomaker.mjs" check videos/project-portrait/_build/movie.json --viewer videos/project-portrait/_build/portrait-viewer.js
-node "$portrait_workspace/videomaker/bin/videomaker.mjs" preview videos/project-portrait/_build/movie.json --viewer videos/project-portrait/_build/portrait-viewer.js --width 1280
+machinome movie check videos/project-portrait/_build/movie.json
+machinome movie preview videos/project-portrait/_build/movie.json --width 1280
 node videos/project-portrait/inspect.mjs "$portrait_workspace/videomaker"
 node videos/project-portrait/verify-motion.mjs "$portrait_workspace/videomaker"
-node "$portrait_workspace/videomaker/bin/videomaker.mjs" render videos/project-portrait/_build/movie.json --viewer videos/project-portrait/_build/portrait-viewer.js
+machinome movie render videos/project-portrait/_build/movie.json
 node videos/project-portrait/finish.mjs
 ```
 

@@ -1,6 +1,6 @@
 """Project-portrait visual vocabulary. Words and timing live in movie.py."""
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-or-later.
-from machinome_movie import Action, Element, Set, Slot
+from machinome.movie import Action, Element, Set, Slot
 
 
 class PortraitStage(Set):

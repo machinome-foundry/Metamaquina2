@@ -2,7 +2,7 @@
 # Copyright (C) 2026 Luis Henrique Cassis Fagundes. AGPL-3.0-or-later.
 from pathlib import Path
 import json
-from machinome_movie import (
+from machinome.movie import (
     Camera, Chapter, Credits, Cue, Dissolve, Evidence, FadeIn, FadeOut,
     Format, Layer, Mark, Move, Movie, Narration, Narrator, Release,
     Shot, Style, Loop, View, evaluate, write,
