@@ -76,7 +76,7 @@ Passed in 17.65 seconds with the exact-suite cache warm.
 ```sh
 SOLID_BUILD_DIR=_build/belt-pulley-angle \
 machinome snapshot simulation/metamaquina2.py \
-  -o _build/belt-pulley-angle-driven-web.png --renderer web \
+  -o _build/belt-pulley-angle-driven-web.png --viewer web \
   --autocenter --viewall --imgsize 1280x720 \
   --drive x=90 --drive y=-80 --drive z=140
 ```

@@ -50,7 +50,7 @@ the scene but the renderer returned an empty failure after an existing
 `jhead.scad` line-107 parser diagnostic.  The fallback web-renderer capture
 used the same pose and independent `_build/rolling-angle-snapshot` directory:
 
-`machinome snapshot simulation/metamaquina2.py -o _build/rolling-angle-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
+`machinome snapshot simulation/metamaquina2.py -o _build/rolling-angle-driven-web.png --viewer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
 
 Visual inspection found the carriage displaced toward +X and the bed toward
 -Y as commanded; the frame, raised X beam, hot end, and filament run remained

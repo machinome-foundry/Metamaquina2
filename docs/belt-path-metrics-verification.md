@@ -62,7 +62,7 @@ After the corrected run, `machinome build simulation/metamaquina2.py`
 completed successfully in the same isolated build directory and reported the
 published artifacts current.  The fresh representative image command was:
 
-`machinome snapshot simulation/metamaquina2.py -o _build/belt-path-metrics-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
+`machinome snapshot simulation/metamaquina2.py -o _build/belt-path-metrics-driven-web.png --viewer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
 
 Visual inspection is limited to the whole-machine exterior pose: carriage and
 bed displacement, frame, raised beam, hot end, and filament run are coherent.

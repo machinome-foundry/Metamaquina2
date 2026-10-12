@@ -42,7 +42,7 @@ existing `jhead.scad` line-107 parser diagnostic while completing normally.
 
 The representative web snapshot command was:
 
-`machinome snapshot simulation/metamaquina2.py -o _build/pulley-pitch-radius-driven-web.png --renderer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
+`machinome snapshot simulation/metamaquina2.py -o _build/pulley-pitch-radius-driven-web.png --viewer web --autocenter --viewall --imgsize 1280x720 --drive x=90 --drive y=-80 --drive z=140`
 
 Visual inspection is limited to the whole-machine exterior pose: carriage and
 bed displacement, frame, raised beam, hot end, and filament run are coherent.
