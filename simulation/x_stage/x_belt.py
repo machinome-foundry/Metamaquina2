@@ -8,7 +8,7 @@ import math
 
 from molejo import P, Shape, Wrap
 from machinome.motion.ports import TranslationalPort
-from machinome_mechanics import belt_pulley_angle, rolling_travel
+from machinome.mechanics import belt_pulley_angle, rolling_travel
 
 from simulation import gt2
 from simulation.hardware.gt2_pulley import TEETH
